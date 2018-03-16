@@ -9,7 +9,7 @@ package slidingttt.logic;
  *
  * @author Valhe Kouneli
  */
-public class main {
+public class Main {
 
     /**
      * @param args the command line arguments
