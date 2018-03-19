@@ -6,7 +6,7 @@ SlidingTicTacToe
 
 ## Game rules
 
-Sliding Tic Tac Toe (STTT from now on) is a two-player game and it is played on a board that consists of X vertical lines and X horizontal lines that form X*X intersections that serve as the **Field** of the fame.
+Sliding Tic Tac Toe (STTT from now on) is a two-player game and it is played on a board that consists of X vertical lines and X horizontal lines that form X*X intersections that serve as the **Field** of the game.
 
 ![Board](rules/board.png)
 
