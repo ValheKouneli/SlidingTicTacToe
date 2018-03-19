@@ -56,7 +56,8 @@ public class Board {
                       we'd rather save it as a size of the array */
         
         if (size % 2 == 0) {
-            System.out.println("Size has to be an odd number. Size set to " + size + 1 + " instead.");
+            System.out.println("Size has to be an odd number. Size set to "
+                    + size + 1 + " instead.");
             size++;
         }
         
@@ -97,7 +98,8 @@ public class Board {
      * @param to_y  new y coordinate of the piece being moved
      * @return true if the move is legal, false if not
      */
-    public boolean move(char color, int from_x, int from_y, int to_x, int to_y) {
+    public boolean move(char color,
+                        int from_x, int from_y, int to_x, int to_y) {
         char from = board[from_x][from_y];
         char to = board[to_x][to_y];
         
@@ -105,31 +107,59 @@ public class Board {
         * Check if the move is legal. If not, print out the reason.
         */
         if (Character.toLowerCase(from) != color) {
-            System.out.println("Illegal move: You can not move your opponent's piece.");
+            System.out.println("Illegal move: You can not move your opponent's"
+                    + " piece.");
             return false;
-        } else if (to != BASE_VERTICAL && to != BASE_HORIZONTAL && to != EMPTY) {
+            
+        } else if (to != BASE_VERTICAL &&
+                   to != BASE_HORIZONTAL &&
+                   to != EMPTY) {
             System.out.println("Illegal move: That space is occupied.");
             return false;
-        } else if ((from == PLAYER1_VERTICAL || from == PLAYER2_VERTICAL) && from_y != to_y) {
-            System.out.println("Illegal move: Vertical Pieces can move only up and down on their own line.");
+            
+        } else if ((from == PLAYER1_VERTICAL || from == PLAYER2_VERTICAL)
+                    && from_y != to_y) {
+            System.out.println("Illegal move: Vertical Pieces can move only up"
+                    + " and down on their own line.");
             return false;
-        } else if ((from == PLAYER1_HORIZONTAL || from == PLAYER2_HORIZONTAL) && from_x != to_x) {
-            System.out.println("Illegal move: Horizontal Pieces can move only right and left on their own line.");
+            
+        } else if ((from == PLAYER1_HORIZONTAL || from == PLAYER2_HORIZONTAL)
+                    && from_x != to_x) {
+            System.out.println("Illegal move: Horizontal Pieces can move only "
+                    + "right and left on their own line.");
             return false;
-        } else if (isInBase(from_x, from_y) && ((reds_on_field == 3 && color == 'r') || (blacks_on_field == 3 && color == 'b'))) {
-            System.out.println("Illegal move: You already have three pieces on the field.");
+            
+        } else if (isInBase(from_x, from_y) &&
+                   ((reds_on_field == 3 && color == 'r') ||
+                    (blacks_on_field == 3 && color == 'b'))) {
+            System.out.println("Illegal move: You already have three pieces on "
+                    + "the field.");
             return false;
+            
         } else if (from == PLAYER1_HORIZONTAL || from == PLAYER2_HORIZONTAL){
+            /*
+            * Go trough all places between the from position and the to
+            * position and check for blocking horizontal pieces.
+            */
             for (int j=min(from_y, to_y)+1; j<max(from_y, to_y); j++){
-                if (board[from_x][j] == PLAYER1_HORIZONTAL || board[from_x][j] == PLAYER2_HORIZONTAL) {
-                    System.out.println("Illegal move: You can not move horizontally past another horizontal piece.");
+                if (board[from_x][j] == PLAYER1_HORIZONTAL ||
+                    board[from_x][j] == PLAYER2_HORIZONTAL) {
+                    System.out.println("Illegal move: You can not move "
+                            + "horizontally past another horizontal piece.");
                     return false;
                 }
             }
+            
         } else if (from == PLAYER1_VERTICAL || from == PLAYER2_VERTICAL){
+            /*
+            * Go trough all places between the from position and the to
+            * position and check for blocking vertical pieces.
+            */
             for (int i = min(from_x, to_x)+1; i< max(from_x, to_x); i++){
-                if (board[i][from_y] == PLAYER1_VERTICAL || board[i][from_y] == PLAYER2_VERTICAL) {
-                    System.out.println("Illegal move: You can not move vertically past another vertical piece.");
+                if (board[i][from_y] == PLAYER1_VERTICAL ||
+                    board[i][from_y] == PLAYER2_VERTICAL) {
+                    System.out.println("Illegal move: You can not move "
+                            + "vertically past another vertical piece.");
                     return false;
                 }
             }
