@@ -5,6 +5,9 @@
  */
 package slidingttt.logic;
 
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+
 /**
  *
  * @author Valhe Kouneli
@@ -40,6 +43,7 @@ public class Board {
         }
         
         this.board = new char[size][size];
+        
 
         for (int i=0; i<size; i++) {
             for (int j=0; j<size; j++) {
@@ -64,6 +68,8 @@ public class Board {
         return size;
     }
     
+
+    
     public boolean move(char color, int from_x, int from_y, int to_x, int to_y) {
         char from = board[from_x][from_y];
         char to = board[to_x][to_y];
@@ -84,13 +90,54 @@ public class Board {
             System.out.println("Illegal move: You already have three pieces on the field.");
             return false;
         } else if (from == PLAYER1_HORIZONTAL || from == PLAYER2_HORIZONTAL){
-            
+            for(int j=min(from_y, to_y)+1; j<max(from_y, to_y); j++){
+                if(board[from_x][j] == PLAYER1_HORIZONTAL || board[from_x][j] == PLAYER2_HORIZONTAL) {
+                    System.out.println("Illegal move: You can not move horizontally past another horizontal piece.");
+                    return false;
+                }
+            }
+        } else if (from == PLAYER1_VERTICAL || from == PLAYER2_VERTICAL){
+            for(int i = min(from_x, to_x)+1; i< max(from_x, to_x); i++){
+                if(board[i][from_y] == PLAYER1_VERTICAL || board[from_y][i] == PLAYER2_VERTICAL) {
+                    System.out.println("Illegal move: You can not move vertically past another vertical piece.");
+                    return false;
+                }
+            }
         }
+        
+        board[to_x][to_y] = from;
+        board[from_x][from_y] = charWhenEmpty(from_x, from_y);
+        if (isInBase(from_x, from_y)) {
+            if (color == 'b') {
+                blacks_on_field++;
+            } else {
+                reds_on_field++;
+            }
+        } else if (isInBase(to_x, to_y)) {
+            if (color == 'b') {
+                blacks_on_field++;
+            } else {
+                reds_on_field++;
+            }
+        }
+        
         return true;
     }
     
     public int getSize(){
         return this.size;
+    }
+    
+    private char charWhenEmpty(int x, int y){
+        
+        if (x==0 || x==size-1) {
+            return BASE_VERTICAL;
+        } else if (y==0 || y==size-1) {
+            return BASE_HORIZONTAL;
+        } else {
+            return EMPTY;
+        }
+        
     }
 
     @Override
@@ -112,8 +159,8 @@ public class Board {
         return temp;
     }
 
-    private boolean isInBase(int from_x, int from_y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private boolean isInBase(int x, int y) {
+        return (x==0 || x==size-1) && (y==0 || y==size-1);
     }
     
 }
