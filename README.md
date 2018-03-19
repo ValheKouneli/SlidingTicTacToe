@@ -8,13 +8,13 @@ SlidingTicTacToe
 
 Sliding Tic Tac Toe (STTT from now on) is a two-player game and it is played on a board that consists of X vertical lines and X horizontal lines that form X*X intersections that serve as the **Field** of the fame.
 
-!Image[rules/board.png]
+![Board](rules/board.png)
 
 One player controls red pieces and the other player black pieces. The aim of the game is to form a line of three pieces of one's own color either horizontally, vertically or diagonally on the Field.
 
 In the beginning, all the pieces are on the sides of the field. For each line of the field, there are two pieces: one black on one side and one red on the other side. The beginning positions of the pieces are called **Bases**. The pieces on the vertical lines are called **Vertical Pieces** and the pieces on the horizontal lines are called **Horizontal Pieces**. They have different properties with will be explained later. Each player has the same amount of pieces (2*X) and also the same amount of Horizontal and Vertical Pieces as the other player. The colors alternate on the sides so that every other piece on one side is red and every other black.
 
-!Image[rules/setup.png]
+![Setup](rules/setup.png)
 
 The players take turns moving one piece of their own color at a time. A piece can be moved according to the following rules:
 
