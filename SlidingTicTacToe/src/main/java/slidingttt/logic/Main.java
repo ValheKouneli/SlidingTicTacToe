@@ -16,7 +16,8 @@ public class Main {
      */
     public static void main(String[] args) {
         Board board = new Board(3);
-        System.out.println(board.toString());
+        Game game = new Game(board);
+        game.start();
     }
     
 }

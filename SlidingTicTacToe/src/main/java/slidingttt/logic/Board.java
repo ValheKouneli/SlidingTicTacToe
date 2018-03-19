@@ -20,12 +20,14 @@ public class Board {
     /** Field size + 2
     */
     private final int size;
+    static int RED = 1;
+    static int BLACK = 2;
     static char CORNER = ' ';
     static char EMPTY = '+';
-    static char PLAYER1_VERTICAL = 'r';
-    static char PLAYER1_HORIZONTAL = 'R';
-    static char PLAYER2_VERTICAL = 'b';
-    static char PLAYER2_HORIZONTAL = 'B';
+    static char RED_VERTICAL = 'r';
+    static char RED_HORIZONTAL = 'R';
+    static char BLACK_VERTICAL = 'b';
+    static char BLACK_HORIZONTAL = 'B';
     static char BASE_VERTICAL = '|';
     static char BASE_HORIZONTAL = '–';
     /** Keeps count of red pieces on the Field.
@@ -71,13 +73,13 @@ public class Board {
                 if ((i==0 || i==size-1) && (j==0 || j==size-1)) {
                     temp = CORNER;
                 } else if ((i==0 && j%2==1) || (i==size-1 && j%2==0)) {
-                    temp = PLAYER1_VERTICAL;
+                    temp = RED_VERTICAL;
                 } else if ((i==0 && j%2==0) || (i==size-1 && j%2==1)) {
-                    temp = PLAYER2_VERTICAL;
+                    temp = BLACK_VERTICAL;
                 } else if ((j==0 && i%2==1) || (j==size-1 && i%2==0)) {
-                    temp = PLAYER1_HORIZONTAL;
+                    temp = RED_HORIZONTAL;
                 } else if ((j==0 && i%2==0) || (j==size-1 && i%2==1)) {
-                    temp = PLAYER2_HORIZONTAL;
+                    temp = BLACK_HORIZONTAL;
                 } else {
                     temp = EMPTY;
                 }
@@ -91,22 +93,44 @@ public class Board {
     /**
      * Moves the playing pieces on the Board.
      * Updates reds_on_field and blacks_on_field when necessary.
-     * @param color either 'b' for black or 'r' for red
+     * @param color either 1 for red or 2 for black
      * @param from_x    old x coordinate of the piece being moved
      * @param from_y    old y coordinate of the piece being moved
      * @param to_x  new x coordinate of the piece being moved
      * @param to_y  new y coordinate of the piece being moved
      * @return true if the move is legal, false if not
      */
-    public boolean move(char color,
+    public boolean move(int color,
                         int from_x, int from_y, int to_x, int to_y) {
+        if (from_x<0 || from_x>size-1 || from_y<0 || from_y>size-1 ||
+            to_x<0 || to_x>size-1 || to_y<0 || to_y>size-1) {
+            System.out.println("Bad coordinates.");
+            return false;
+        }
+        
         char from = board[from_x][from_y];
         char to = board[to_x][to_y];
+        
+        char vertical_own, vertical_opp, horizontal_own, horizontal_opp;
+        int on_field;
+        if (color == RED) {
+            vertical_own = RED_VERTICAL;
+            vertical_opp = BLACK_VERTICAL;
+            horizontal_own = RED_HORIZONTAL;
+            horizontal_opp = BLACK_HORIZONTAL;
+            on_field = reds_on_field;
+        } else {
+            vertical_own = BLACK_VERTICAL;
+            vertical_opp = RED_VERTICAL;
+            horizontal_own = BLACK_HORIZONTAL;
+            horizontal_opp = RED_HORIZONTAL;
+            on_field = blacks_on_field;
+        }
         
         /*
         * Check if the move is legal. If not, print out the reason.
         */
-        if (Character.toLowerCase(from) != color) {
+        if (from != vertical_own && from != horizontal_own) {
             System.out.println("Illegal move: You can not move your opponent's"
                     + " piece.");
             return false;
@@ -117,47 +141,41 @@ public class Board {
             System.out.println("Illegal move: That space is occupied.");
             return false;
             
-        } else if ((from == PLAYER1_VERTICAL || from == PLAYER2_VERTICAL)
-                    && from_y != to_y) {
+        } else if (from == vertical_own && from_y != to_y) {
             System.out.println("Illegal move: Vertical Pieces can move only up"
                     + " and down on their own line.");
             return false;
             
-        } else if ((from == PLAYER1_HORIZONTAL || from == PLAYER2_HORIZONTAL)
-                    && from_x != to_x) {
+        } else if (from == horizontal_own && from_x != to_x) {
             System.out.println("Illegal move: Horizontal Pieces can move only "
                     + "right and left on their own line.");
             return false;
             
-        } else if (isInBase(from_x, from_y) &&
-                   ((reds_on_field == 3 && color == 'r') ||
-                    (blacks_on_field == 3 && color == 'b'))) {
+        } else if (isInBase(from_x, from_y) && on_field == 3) {
             System.out.println("Illegal move: You already have three pieces on "
                     + "the field.");
             return false;
             
-        } else if (from == PLAYER1_HORIZONTAL || from == PLAYER2_HORIZONTAL){
+        } else if (from == horizontal_own) {
             /*
             * Go trough all places between the from position and the to
             * position and check for blocking horizontal pieces.
             */
-            for (int j=min(from_y, to_y)+1; j<max(from_y, to_y); j++){
-                if (board[from_x][j] == PLAYER1_HORIZONTAL ||
-                    board[from_x][j] == PLAYER2_HORIZONTAL) {
+            for (int j=min(from_y, to_y)+1; j<max(from_y, to_y); j++) {
+                if (board[from_x][j] == horizontal_opp) {
                     System.out.println("Illegal move: You can not move "
                             + "horizontally past another horizontal piece.");
                     return false;
                 }
             }
             
-        } else if (from == PLAYER1_VERTICAL || from == PLAYER2_VERTICAL){
+        } else if (from == vertical_own) {
             /*
             * Go trough all places between the from position and the to
             * position and check for blocking vertical pieces.
             */
-            for (int i = min(from_x, to_x)+1; i< max(from_x, to_x); i++){
-                if (board[i][from_y] == PLAYER1_VERTICAL ||
-                    board[i][from_y] == PLAYER2_VERTICAL) {
+            for (int i = min(from_x, to_x)+1; i< max(from_x, to_x); i++) {
+                if (board[i][from_y] == vertical_opp) {
                     System.out.println("Illegal move: You can not move "
                             + "vertically past another vertical piece.");
                     return false;
@@ -170,13 +188,13 @@ public class Board {
         board[to_x][to_y] = from;
         board[from_x][from_y] = charWhenEmpty(from_x, from_y);
         if (isInBase(from_x, from_y)) {
-            if (color == 'b') {
+            if (color == BLACK) {
                 blacks_on_field++;
             } else {
                 reds_on_field++;
             }
         } else if (isInBase(to_x, to_y)) {
-            if (color == 'b') {
+            if (color == BLACK) {
                 blacks_on_field--;
             } else {
                 reds_on_field--;
@@ -226,6 +244,10 @@ public class Board {
         }
         
         return temp;
+    }
+    
+    public char[][] getBoard(){
+        return this.board;
     }
     
     /**

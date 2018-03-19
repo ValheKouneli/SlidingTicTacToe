@@ -15,6 +15,9 @@ import org.junit.Test;
  */
 public class BoardTest {
     
+    static int RED = 1;
+    static int BLACK = 2;
+    
     Board board;
     
     @Before
@@ -43,79 +46,79 @@ public class BoardTest {
     
     @Test
     public void playerCanNotMoveOpponentsPiece() {
-        assertEquals(false, board.move('r', 0, 2, 1, 2));
-        assertEquals(false, board.move('b', 0, 1, 1, 1));
+        assertEquals(false, board.move(RED, 0, 2, 1, 2));
+        assertEquals(false, board.move(BLACK, 0, 1, 1, 1));
     }
     
     @Test
     public void playerCanMoveOwnPieceWhenNothingIsInTheWay() {
-        assertEquals(true, board.move('r', 0, 1, 3, 1));
-        assertEquals(true, board.move('b', 2, 0, 2, 3));
+        assertEquals(true, board.move(RED, 0, 1, 3, 1));
+        assertEquals(true, board.move(BLACK, 2, 0, 2, 3));
     }
     
     @Test
     public void playerCanNotMoveVerticalPieceHorizontally() {
-        board.move('r', 0, 1, 3, 1);
-        assertEquals(false, board.move('r', 3, 1, 3, 2));
+        board.move(RED, 0, 1, 3, 1);
+        assertEquals(false, board.move(RED, 3, 1, 3, 2));
     }
     
     @Test
     public void playerCanNotMoveHorizontalPieceVertically() {
-        board.move('b', 2, 0, 2, 0);
-        assertEquals(false, board.move('b', 2, 0, 1, 0));
+        board.move(BLACK, 2, 0, 2, 1);
+        assertEquals(false, board.move(BLACK, 2, 1, 1, 1));
     }
     
     @Test
     public void playerCanNotMoveToOccupiedSpace() {
-        board.move('r', 0, 1, 3, 1);
-        assertEquals(false, board.move('b', 3, 4, 3, 1));
-        assertEquals(false, board.move('r', 3, 0, 3, 1));
+        board.move(RED, 0, 1, 3, 1);
+        assertEquals(false, board.move(BLACK, 3, 4, 3, 1));
+        assertEquals(false, board.move(RED, 3, 0, 3, 1));
     }
     
     @Test
     public void noMoreThanThreePiecesOfSameColorAllowedOnField() {
-        board.move('r', 1, 0, 1, 1);
-        board.move('r', 3, 0, 3, 1);
-        board.move('r', 2, 4, 2, 3);
-        assertEquals(false, board.move('r', 4, 2, 3, 2));
+        board.move(RED, 1, 0, 1, 1);
+        board.move(RED, 3, 0, 3, 1);
+        board.move(RED, 2, 4, 2, 3);
+        assertEquals(false, board.move(RED, 4, 2, 3, 2));
     }
     
     @Test
     public void horizontalPieceCanNotMovePastAnotherHorizontal() {
-        board.move('r', 1, 0, 1, 3);
-        assertEquals(false, board.move('b', 1, 4, 1, 2));
+        board.move(RED, 1, 0, 1, 3);
+        assertEquals(false, board.move(BLACK, 1, 4, 1, 2));
     }
     
     @Test
     public void verticalPieceCanNotMovePastAnotherVertical() {
-        board.move('r', 0, 1, 3, 1);
-        assertEquals(false, board.move('b', 4, 1, 2, 1));
+        board.move(RED, 0, 1, 3, 1);
+        assertEquals(false, board.move(BLACK, 4, 1, 2, 1));
     }
     
     @Test
     public void verticalPieceCanMovePastHorizontal() {
-        board.move('r', 1, 0, 1, 2);
-        assertEquals(true, board.move('b', 0, 2, 2, 2));
+        board.move(RED, 1, 0, 1, 2);
+        assertEquals(true, board.move(BLACK, 0, 2, 2, 2));
     }
     
     @Test
     public void horizontalPieceCanMovePastVertical(){
-        board.move('r', 0, 1, 1, 1);
-        assertEquals(true, board.move('r', 1, 0, 1, 2));
+        board.move(RED, 0, 1, 1, 1);
+        assertEquals(true, board.move(RED, 1, 0, 1, 2));
     }
     
     @Test
     public void horizontalPieceCanNotMovePastVerticalAndHorizontal(){
-        board.move('r', 0, 1, 1, 1);
-        board.move('b', 1, 4, 1, 2);
-        assertEquals(false, board.move('r', 1, 0, 1, 3));
+        board.move(RED, 0, 1, 1, 1);
+        board.move(BLACK, 1, 4, 1, 2);
+        assertEquals(false, board.move(RED, 1, 0, 1, 3));
     }
     
     @Test
     public void verticalPieceCanNotMovePastHorizontalAndVertical(){
-        board.move('r', 1, 0, 1, 1);
-        board.move('b', 4, 1, 2, 1);
-        assertEquals(false, board.move('r', 0, 1, 3, 1));
+        board.move(RED, 1, 0, 1, 1);
+        board.move(BLACK, 4, 1, 2, 1);
+        assertEquals(false, board.move(RED, 0, 1, 3, 1));
     }
    
     
