@@ -15,8 +15,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Board board = new Board(5);
-        board.printBoard();
+        Board board = new Board(3);
+        System.out.println(board.toString());
     }
     
 }
