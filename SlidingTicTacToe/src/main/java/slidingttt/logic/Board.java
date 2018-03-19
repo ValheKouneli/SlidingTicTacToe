@@ -9,13 +9,17 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 /**
- *
- * @author Valhe Kouneli
+ * This class represents the game board for the game Sliding Tic Tac Toe (STTT).
+ * The rules of the game are described on /README.md.
+ * Class has a public method for moving the pieces on the board.
+ * 
  */
 public class Board {
     
     private char[][] board;
-    private final int size; // Field size + 2
+    /** Field size + 2
+    */
+    private final int size;
     static char CORNER = ' ';
     static char EMPTY = '+';
     static char PLAYER1_VERTICAL = 'r';
@@ -24,15 +28,29 @@ public class Board {
     static char PLAYER2_HORIZONTAL = 'B';
     static char BASE_VERTICAL = '|';
     static char BASE_HORIZONTAL = '–';
+    /** Keeps count of red pieces on the Field.
+     */
     private int reds_on_field;
+    /** Keeps count of black pieces on the Field.
+     */
     private int blacks_on_field;
 
+    /**
+     * Creates a STTT board with size amount of horizontal and vertical lines.
+     * If size is an even number, size will be set to size plus one.
+     * @param size  The number of horizontal lines on the STTT board.
+     */
     Board(int size) {
         this.size = initBoard(size);
         reds_on_field = 0;
         blacks_on_field = 0;
     }
     
+    /**
+     * Initializes the board to the beginning position.
+     * @param size  Number of the horizontal lines on the STTT board. If it is even, one will be added.
+     * @return  The size of the array that is created to represent the STTT board.
+     */
     private int initBoard(int size) {
         size += 2; /* size is given as the size of the Field, but
                       we'd rather save it as a size of the array */
@@ -69,11 +87,23 @@ public class Board {
     }
     
 
-    
+    /**
+     * Moves the playing pieces on the Board.
+     * Updates reds_on_field and blacks_on_field when necessary.
+     * @param color either 'b' for black or 'r' for red
+     * @param from_x    old x coordinate of the piece being moved
+     * @param from_y    old y coordinate of the piece being moved
+     * @param to_x  new x coordinate of the piece being moved
+     * @param to_y  new y coordinate of the piece being moved
+     * @return true if the move is legal, false if not
+     */
     public boolean move(char color, int from_x, int from_y, int to_x, int to_y) {
         char from = board[from_x][from_y];
         char to = board[to_x][to_y];
         
+        /*
+        * Check if the move is legal. If not, print out the reason.
+        */
         if (Character.toLowerCase(from) != color) {
             System.out.println("Illegal move: You can not move your opponent's piece.");
             return false;
@@ -104,7 +134,9 @@ public class Board {
                 }
             }
         }
-        
+        /*
+        * Update the number of red/black pieces on board if necessary.
+        */
         board[to_x][to_y] = from;
         board[from_x][from_y] = charWhenEmpty(from_x, from_y);
         if (isInBase(from_x, from_y)) {
@@ -115,9 +147,9 @@ public class Board {
             }
         } else if (isInBase(to_x, to_y)) {
             if (color == 'b') {
-                blacks_on_field++;
+                blacks_on_field--;
             } else {
-                reds_on_field++;
+                reds_on_field--;
             }
         }
         
@@ -128,6 +160,7 @@ public class Board {
         return this.size;
     }
     
+
     private char charWhenEmpty(int x, int y){
         /* this method should never be called with
            coordinates to corner places
@@ -143,6 +176,9 @@ public class Board {
         
     }
 
+    /**
+     * @return String representation of the Board.
+     */
     @Override
     public String toString() {
         String temp = "  ";
@@ -161,7 +197,12 @@ public class Board {
         
         return temp;
     }
-
+    
+    /**
+     * @param x x coordinate of a place on the board
+     * @param y y coordinate of a place on the board
+     * @return true if coordinate (x,y) is a base, false if not
+     */
     private boolean isInBase(int x, int y) {
         return x==0 || x==size-1 || y==0 || y==size-1;
     }
