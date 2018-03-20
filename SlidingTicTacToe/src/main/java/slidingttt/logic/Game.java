@@ -12,12 +12,14 @@ import java.util.Scanner;
  */
 public class Game {
     
-    Board board;
-    Situation situation;
+    private Board board;
+    private Situation situation;
     
     
-    public Game(Board board) {
-        this.board = board;
+    public Game(int size) {
+        board = new Board(size);
+        board.setBeginningPosition();
+        situation = board.getSituation();
     }
     
     public void start() {

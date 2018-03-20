@@ -15,8 +15,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Board board = new Board(3);
-        Game game = new Game(board);
+        Game game = new Game(3);
         game.start();
     }
     

@@ -47,4 +47,11 @@ public class Piece {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
+    public Piece getCopy(){
+        Piece copy = new Piece(color, orientation);
+        copy.setOtherPiece(otherPieceOnTheSameLine);
+        copy.setPosition(position);
+        return copy;
+    }
+    
 }

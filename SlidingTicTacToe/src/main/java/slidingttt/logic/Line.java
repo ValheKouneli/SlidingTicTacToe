@@ -25,11 +25,10 @@ public class Line {
         this.number = number;
         red = new Piece("red", orientation);
         black = new Piece("black", orientation);
-        red.setOtherPiece(black);
-        black.setOtherPiece(red);
+        setBeginningPosition();
     }
     
-    public void setBeginningPosition() {
+    private void setBeginningPosition() {
         if (number % 2 == 0) {
             red.setPosition(0);
             black.setPosition(length);
@@ -39,9 +38,11 @@ public class Line {
         }
     }
     
-    public  void setPieces(int redPosition, int blackPosition) {
-        red.setPosition(redPosition);
-        black.setPosition(blackPosition);
+    public  void setPieces(Piece red, Piece black) {
+        this.red = red;
+        this.black = black;
+        red.setOtherPiece(black);
+        black.setOtherPiece(red);
     }
     
     public boolean move(String color, int destination) {
@@ -62,5 +63,11 @@ public class Line {
     
     public String getOrientation() {
         return orientation;
+    }
+    
+    public Line getCopy() {
+        Line copy = new Line(orientation, number, length);
+        copy.setPieces(red.getCopy(), black.getCopy());
+        return copy;
     }
 }

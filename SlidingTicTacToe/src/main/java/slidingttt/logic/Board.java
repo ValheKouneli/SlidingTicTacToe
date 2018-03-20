@@ -20,8 +20,11 @@ public class Board {
     static final char BASE_VERTICAL = '|';
     static final char BASE_HORIZONTAL = '–';
     
+    static final int NUMBER_OF_DIRECTIONS = 2;
+    
     private final int size;
-    private final Line[] lines;
+    private Line[][] lines;
+    private Situation situation;
 
     /**
      * Creates a STTT board with size amount of horizontal and vertical lines.
@@ -35,34 +38,53 @@ public class Board {
             size++;
         }
         this.size = size;
-        lines = new Line[2*size];
-        for (int i=0; i<size; i++) {
-            lines[i] = new Line("horizontal", i, size+2);
-        }
-        for (int i=size; i<2*size; i++) {
-            lines[i] = new Line("vertical", i, size+2);
-        }
     }
-    
-    /**
-     * Initializes the board to the beginning position.
-     */
+
     public void setBeginningPosition() {
-        for (int i=0; i<2*size; i++) {
-            lines[i].setBeginningPosition();
+        lines = new Line[NUMBER_OF_DIRECTIONS][size];
+        for (int i=0; i<size; i++) {
+            lines[0][i] = new Line("horizontal", i, size+2);
         }
+        for (int i=size; i<size; i++) {
+            lines[1][i] = new Line("vertical", i, size+2);
+        }
+        
+        situation = new Situation(size);
+        situation.setBeginningSituation();
     }
     
-    public void setBoard() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void setLines(Line[][] lines) {
+        this.lines = lines;
     }
 
     public int getSize() {
         return this.size;
     }
     
-    public Line[] getLines() {
+    public Line[][] getLines() {
         return lines;
+    }
+    
+    public Situation getSituation() {
+        return situation;
+    }
+    
+    public void setSituation(Situation situation) {
+        this.situation = situation;
+    }
+    
+    public Board getCopy() {
+        Board board_copy = new Board(size);
+        Line[][] line_copys = new Line[NUMBER_OF_DIRECTIONS][size];
+        for (int i=0; i<size; i++) {
+            line_copys[0][i] = lines[0][i].getCopy();
+        }
+        for (int i=0; i<size; i++) {
+            line_copys[1][i] = lines[1][i].getCopy();
+        }
+        board_copy.setLines(line_copys);
+        board_copy.setSituation(situation.getCopy());
+        return board_copy;
     }
             
     @Override
