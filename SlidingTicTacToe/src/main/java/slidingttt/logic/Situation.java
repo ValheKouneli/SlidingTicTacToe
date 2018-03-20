@@ -48,6 +48,26 @@ public class Situation {
         this.black_positions = black_positions;
     }
     
+    public int getSize() {
+        return size;
+    }
+    
+    public int getBlacksOnField() {
+        return blacks_on_field;
+    }
+    
+    public int getRedsOnField() {
+        return reds_on_field;
+    }
+    
+    public boolean[][] getRedPositions() {
+        return red_positions;
+    }
+    
+    public boolean[][] getBlackPositions() {
+        return black_positions;
+    }
+    
     public Situation getCopy(){
         Situation copy = new Situation(size);
         copy.setSituation(reds_on_field, blacks_on_field, Arrays.copyOf(red_positions, size), Arrays.copyOf(black_positions, size));

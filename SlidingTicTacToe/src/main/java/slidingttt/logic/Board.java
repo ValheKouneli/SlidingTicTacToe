@@ -37,7 +37,7 @@ public class Board {
     Board(int size) {
         if (size % 2 == 0) {
             System.out.println("Size has to be an odd number. Size set to "
-                    + size + 1 + " instead.");
+                    + (size+1) + " instead.");
             size++;
         }
         this.size = size;
@@ -80,6 +80,7 @@ public class Board {
     }
     
     public void setLines(Line[][] lines) {
+        //does not check if the lines are of proper lenght
         this.lines = lines;
     }
 
