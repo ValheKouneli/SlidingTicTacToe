@@ -58,20 +58,25 @@ public class Board {
         }
     }
 
-
+    /**
+     * Creates the lines of the game and sets them to the beginning position.
+     * Setting the line to the beginning position creates the pieces
+     * and sets them to the beginning position.
+     */
     public void setBeginningPosition() {
-        lines = new Line[NUMBER_OF_DIRECTIONS][size];
+        this.lines = new Line[NUMBER_OF_DIRECTIONS][size];
+        
         for (int i=0; i<size; i++) {
-            lines[0][i] = new Line("horizontal", i+1, size+2);
-            lines[0][i].setBeginningPosition();
+            this.lines[0][i] = new Line("horizontal", i+1, size+2);
+            this.lines[0][i].setBeginningPosition();
         }
-        for (int i=size; i<size; i++) {
-            lines[1][i] = new Line("vertical", i+1, size+2);
-            lines[1][i].setBeginningPosition();
+        for (int i=0; i<size; i++) {
+            this.lines[1][i] = new Line("vertical", i+1, size+2);
+            this.lines[1][i].setBeginningPosition();
         }
         
-        situation = new Situation(size);
-        situation.setBeginningSituation();
+        this.situation = new Situation(size);
+        this.situation.setBeginningSituation();
     }
     
     public void setLines(Line[][] lines) {
