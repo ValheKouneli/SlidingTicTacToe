@@ -32,8 +32,13 @@ public class LineTest {
     @Test
     public void settingBeginningPositionWorks() {
         line.setBeginningPosition();
-        assertEquals("red", line.getPiece("red"));
+        assertEquals("red", line.getPiece("red").getColor());
+        assertEquals("black", line.getPiece("black").getColor());
+        assertEquals(line.getOrientation(), line.getPiece("black").getOrientation());
+        assertEquals(line.getOrientation(), line.getPiece("red").getOrientation());
         assertEquals(0, line.getPiece("red").getPosition());
+        assertEquals(0, line.getPiece("black").getOtherPiece().getPosition());
+        assertEquals(4, line.getPiece("black").getPosition());
         assertEquals(4, line.getPiece("red").getOtherPiece().getPosition());
     }
     

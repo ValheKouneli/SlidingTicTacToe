@@ -28,6 +28,8 @@ public class Line {
     public void setBeginningPosition() {
         red = new Piece("red", orientation);
         black = new Piece("black", orientation);
+        red.setOtherPiece(black);
+        black.setOtherPiece(red);
         if (number % 2 == 1) {
             red.setPosition(0);
             black.setPosition(length-1);
