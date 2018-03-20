@@ -20,20 +20,13 @@ public class Board {
     static final char BASE_VERTICAL = '|';
     static final char BASE_HORIZONTAL = '–';
     
-    
-    /** Keeps count of red pieces on the Field.
-     */
-    private int reds_on_field;
-    /** Keeps count of black pieces on the Field.
-     */
-    private int blacks_on_field;
     private final int size;
-    private String winner;
+    private final Line[] lines;
 
     /**
      * Creates a STTT board with size amount of horizontal and vertical lines.
      * If size is an even number, size will be set to size plus one.
-     * @param size  The number of horizontal lines on the STTT board.
+     * @param size  The number of horizontal/vertical lines on the STTT board.
      */
     Board(int size) {
         if (size % 2 == 0) {
@@ -42,50 +35,39 @@ public class Board {
             size++;
         }
         this.size = size;
-        reds_on_field = 0;
-        blacks_on_field = 0;
-        winner = "UNDECIDED";
+        lines = new Line[2*size];
+        for (int i=0; i<size; i++) {
+            lines[i] = new Line("horizontal", i, size+2);
+        }
+        for (int i=size; i<2*size; i++) {
+            lines[i] = new Line("vertical", i, size+2);
+        }
     }
     
     /**
      * Initializes the board to the beginning position.
      */
-    public void initBoard() {
-        
+    public void setBeginningPosition() {
+        for (int i=0; i<2*size; i++) {
+            lines[i].setBeginningPosition();
+        }
     }
     
-    public void setBoard(boolean[] horizontalReds, boolean[] verticalReds,
-            boolean[] horizontalBlacks, boolean[] verticalBlacks[]) {
-        
-    }
-    
-    public boolean moveRedHorizontal(int lineNumber, int destination) {
-        return false;
-    }
-    
-    public boolean moveBlackHorizontal(int lineNumber, int destination) {
-        return false;
-    }
-    
-    public boolean moveRedVertical(int lineNumber, int destination) {
-        return false;
-    }
-    
-    public boolean moveBlackVertical(int lineNumber, int destination) {
-        return false;
+    public void setBoard() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public int getSize() {
         return this.size;
     }
     
-    public String returnWinner() {
-        return winner;
+    public Line[] getLines() {
+        return lines;
     }
             
     @Override
     public String toString() {
-        return "";
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }

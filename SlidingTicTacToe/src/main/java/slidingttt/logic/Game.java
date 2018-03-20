@@ -13,6 +13,7 @@ import java.util.Scanner;
 public class Game {
     
     Board board;
+    Situation situation;
     
     
     public Game(Board board) {
@@ -21,8 +22,12 @@ public class Game {
     
     public void start() {
         Scanner reader = new Scanner(System.in);
-
         reader.close();
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    public boolean move(Piece piece, int destination) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
     
