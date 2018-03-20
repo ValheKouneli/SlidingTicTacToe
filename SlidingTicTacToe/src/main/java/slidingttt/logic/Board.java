@@ -5,6 +5,8 @@
  */
 package slidingttt.logic;
 
+import java.util.Arrays;
+
 
 public class Board {
     
@@ -25,6 +27,7 @@ public class Board {
     private final int size;
     private Line[][] lines;
     private Situation situation;
+    private final char[][] emptyBoardRepresentation;
 
     /**
      * Creates a STTT board with size amount of horizontal and vertical lines.
@@ -38,15 +41,33 @@ public class Board {
             size++;
         }
         this.size = size;
+        
+        emptyBoardRepresentation = new char[size+2][size+2];
+        String topAndBottom = "" + CORNER;
+        String middle = "" + BASE_HORIZONTAL;
+        for (int i=0; i<size; i++){
+            topAndBottom += BASE_VERTICAL;
+            middle += EMPTY;
+        }
+        topAndBottom += CORNER;
+        middle += BASE_HORIZONTAL;
+        emptyBoardRepresentation[0] = topAndBottom.toCharArray();
+        emptyBoardRepresentation[size+1] = topAndBottom.toCharArray();
+        for (int i=1; i<size+1; i++){
+            emptyBoardRepresentation[i] = middle.toCharArray();
+        }
     }
+
 
     public void setBeginningPosition() {
         lines = new Line[NUMBER_OF_DIRECTIONS][size];
         for (int i=0; i<size; i++) {
-            lines[0][i] = new Line("horizontal", i, size+2);
+            lines[0][i] = new Line("horizontal", i+1, size+2);
+            lines[0][i].setBeginningPosition();
         }
         for (int i=size; i<size; i++) {
-            lines[1][i] = new Line("vertical", i, size+2);
+            lines[1][i] = new Line("vertical", i+1, size+2);
+            lines[1][i].setBeginningPosition();
         }
         
         situation = new Situation(size);
@@ -89,7 +110,38 @@ public class Board {
             
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        char[][] boardAsChars = Arrays.copyOf(emptyBoardRepresentation, size+2);
+        int x;
+        int y;
+        /*
+        * Horizontal lines
+        */
+        for (Line line : lines[0]) { 
+            x = line.getNumber();
+            y = line.getPiece("red").getPosition();
+            boardAsChars[x][y] = RED_HORIZONTAL;
+            y = line.getPiece("black").getPosition();
+            boardAsChars[x][y] = BLACK_HORIZONTAL;
+        }
+        /*
+        * Vertical lines
+        */
+        for (Line line: lines[1]) {
+            y = line.getNumber();
+            x = line.getPiece("red").getPosition();
+            boardAsChars[x][y] = RED_VERTICAL;
+            x = line.getPiece("black").getPosition();
+            boardAsChars[x][y] = BLACK_VERTICAL;
+        }
+        
+        String temp = "";
+        for (int i=0; i<size+2; i++) {
+            for (int j=0; j<size+2; j++) {
+                temp += boardAsChars[i][j];
+            }
+            temp += '\n';
+        }
+        return temp;
     }
     
 }

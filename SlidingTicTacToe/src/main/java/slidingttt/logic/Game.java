@@ -25,6 +25,7 @@ public class Game {
     public void start() {
         Scanner reader = new Scanner(System.in);
         reader.close();
+        System.out.println(board.toString());
         throw new UnsupportedOperationException("Not supported yet.");
     }
     

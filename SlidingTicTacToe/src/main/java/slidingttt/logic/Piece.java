@@ -27,8 +27,12 @@ public class Piece {
         this.otherPieceOnTheSameLine = otherPieceOnTheSameLine;
     }
     
-    public String getColor(){
+    public String getColor() {
         return color;
+    }
+    
+    public String getOrientation() {
+        return orientation;
     }
     
     public int getPosition(){
@@ -45,6 +49,10 @@ public class Piece {
     
     public int[] getPossibleMoves(int reds_on_field, int blacks_on_field) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    public Piece getOtherPiece() {
+        return otherPieceOnTheSameLine;
     }
     
     public Piece getCopy(){

@@ -17,22 +17,22 @@ public class BoardTest {
     
     Board board;
     
-    
-    @Before
-    public void setUp(){
-        board = new Board(3);
-    }
-    
-    @Test
-    public void toStringWorking(){
-        assertEquals(
-                    "  0 1 2 3 4 \n" +
-                    "0   r b r   \n" +
-                    "1 R + + + B \n" +
-                    "2 B + + + R \n" +
-                    "3 R + + + B \n" +
-                    "4   b r b   \n", board.toString());
-    }
+//    
+//    @Before
+//    public void setUp(){
+//        board = new Board(3);
+//    }
+//    
+//    @Test
+//    public void toStringWorking(){
+//        board.setBeginningPosition();
+//        assertEquals(
+//                    "  r b r   \n" +
+//                    "R + + + B \n" +
+//                    "B + + + R \n" +
+//                    "R + + + B \n" +
+//                    "  b r b   \n", board.toString());
+//    }
     
     
     

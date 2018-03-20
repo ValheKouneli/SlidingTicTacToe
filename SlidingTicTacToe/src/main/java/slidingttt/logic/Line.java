@@ -23,18 +23,17 @@ public class Line {
         this.orientation = orientation;
         this.length = length;
         this.number = number;
-        red = new Piece("red", orientation);
-        black = new Piece("black", orientation);
-        setBeginningPosition();
     }
     
-    private void setBeginningPosition() {
-        if (number % 2 == 0) {
+    public void setBeginningPosition() {
+        red = new Piece("red", orientation);
+        black = new Piece("black", orientation);
+        if (number % 2 == 1) {
             red.setPosition(0);
-            black.setPosition(length);
+            black.setPosition(length-1);
         } else {
             black.setPosition(0);
-            red.setPosition(length);
+            red.setPosition(length-1);
         }
     }
     
@@ -63,6 +62,14 @@ public class Line {
     
     public String getOrientation() {
         return orientation;
+    }
+    
+    public int getNumber() {
+        return number;
+    }
+    
+    public int getLength() {
+        return length;
     }
     
     public Line getCopy() {
