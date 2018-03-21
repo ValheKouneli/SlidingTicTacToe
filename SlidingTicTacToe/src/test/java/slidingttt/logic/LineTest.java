@@ -19,45 +19,45 @@ public class LineTest {
     
     @Before
     public void setUp() {
-        line = new Line("vertical", 1, 5);
+        line = new Line(Const.VERTICAL, 1, 5);
     }
     
     @Test
     public void initializationSetsCorrectNumberAndLength() {
-        assertEquals("vertical", line.getOrientation());
+        assertEquals(Const.VERTICAL, line.getOrientation());
         assertEquals(1, line.getNumber());
         assertEquals(5, line.getLength());
     }
     
     @Test
     public void initializationSetsCorrectPieceColors() {
-        assertEquals("red", line.getPiece("red").getColor());
-        assertEquals("black", line.getPiece("black").getColor());
+        assertEquals(Const.RED, line.getPiece(Const.RED).getColor());
+        assertEquals(Const.BLACK, line.getPiece(Const.BLACK).getColor());
 
     }
     
     @Test
     public void initializationSetsCorrectPieceOrientation() {
-        assertEquals(line.getOrientation(), line.getPiece("black").getOrientation());
-        assertEquals(line.getOrientation(), line.getPiece("red").getOrientation());
+        assertEquals(line.getOrientation(), line.getPiece(Const.BLACK).getOrientation());
+        assertEquals(line.getOrientation(), line.getPiece(Const.RED).getOrientation());
     }
     
     @Test
     public void initializationSetsCorrectPiecePositions() {
-        assertEquals(0, line.getPiece("red").getPosition());
-        assertEquals(4, line.getPiece("black").getPosition());
+        assertEquals(0, line.getPiece(Const.RED).getPosition());
+        assertEquals(4, line.getPiece(Const.BLACK).getPosition());
     }
     
     @Test
     public void initializationLetsPiecesKnowEachOther() {
-        assertEquals(0, line.getPiece("black").getOtherPiece().getPosition());
-        assertEquals(4, line.getPiece("red").getOtherPiece().getPosition());
+        assertEquals(0, line.getPiece(Const.BLACK).getOtherPiece().getPosition());
+        assertEquals(4, line.getPiece(Const.RED).getOtherPiece().getPosition());
     }
     
     @Test
     public void getCopyWorks() {
         Line copy = line.getCopy();
-        copy.getPiece("red").setPosition(3);
-        assertEquals(0, line.getPiece("red").getPosition());
+        copy.getPiece(Const.RED).setPosition(3);
+        assertEquals(0, line.getPiece(Const.RED).getPosition());
     }
 }

@@ -19,13 +19,13 @@ public class PieceTest {
     
     @Before
     public void setUp() {
-        piece = new Piece("red", "vertical", 0);
+        piece = new Piece(Const.RED, Const.VERTICAL, 0);
     }
     
     @Test
     public void initilizationWorks() {
-        assertEquals("red", piece.getColor());
-        assertEquals("vertical", piece.getOrientation());
+        assertEquals(Const.RED, piece.getColor());
+        assertEquals(Const.VERTICAL, piece.getOrientation());
     }
     
     @Test
@@ -36,9 +36,9 @@ public class PieceTest {
     
     @Test
     public void settingOtherPieceWorks() {
-        Piece other = new Piece("black", "upside down", 0);
+        Piece other = new Piece(Const.BLACK, 123, 0);
         piece.setOtherPiece(other);
-        assertEquals("upside down", piece.getOtherPiece().getOrientation());
+        assertEquals(123, piece.getOtherPiece().getOrientation());
     }
     
     @Test

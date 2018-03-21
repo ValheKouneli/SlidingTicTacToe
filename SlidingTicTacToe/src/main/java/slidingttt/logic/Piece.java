@@ -12,12 +12,12 @@ package slidingttt.logic;
  */
 public class Piece {
     
-    private final String color;
+    private final int color;
     private int position;
     private Piece otherPieceOnTheSameLine;
-    private final String orientation;
+    private final int orientation;
     
-    public Piece(String color, String orientation, int position) {
+    public Piece(int color, int orientation, int position) {
         this.color = color;
         this.orientation = orientation;
         this.position = position;
@@ -28,11 +28,11 @@ public class Piece {
         this.otherPieceOnTheSameLine = otherPieceOnTheSameLine;
     }
     
-    public String getColor() {
+    public int getColor() {
         return color;
     }
     
-    public String getOrientation() {
+    public int getOrientation() {
         return orientation;
     }
     

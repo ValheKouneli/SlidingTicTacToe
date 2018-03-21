@@ -17,9 +17,9 @@ public class Line {
     private final int number;
     private Piece red;
     private Piece black;
-    private final String orientation;
+    private final int orientation;
     
-    public Line(String orientation, int number, int length){
+    public Line(int orientation, int number, int length){
         this.orientation = orientation;
         this.length = length;
         this.number = number;
@@ -27,8 +27,8 @@ public class Line {
     }
     
     private void setBeginningPosition() {
-        red = new Piece("red", orientation, 0);
-        black = new Piece("black", orientation, 0);
+        red = new Piece(Const.RED, orientation, 0);
+        black = new Piece(Const.BLACK, orientation, 0);
         red.setOtherPiece(black);
         black.setOtherPiece(red);
         if (number % 2 == 1) {
@@ -45,23 +45,23 @@ public class Line {
         black.setPosition(black_position);
     }
     
-    public boolean move(String color, int destination) {
+    public boolean move(int color, int destination) {
         switch (color) {
-            case "red":     return red.move(destination);
-            case "black":   return black.move(destination);
+            case Const.RED:     return red.move(destination);
+            case Const.BLACK:   return black.move(destination);
             default:        throw new InvalidParameterException("Color not in use.");
         }
     }
     
-    public Piece getPiece(String color){
+    public Piece getPiece(int color){
         switch (color) {
-            case "red":     return red;
-            case "black":   return black;
-            default:        throw new InvalidParameterException("Color not in use.");
+            case Const.RED:     return red;
+            case Const.BLACK:   return black;
+            default:            throw new InvalidParameterException("Color not in use.");
         }
     }
     
-    public String getOrientation() {
+    public int getOrientation() {
         return orientation;
     }
     

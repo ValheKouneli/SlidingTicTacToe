@@ -63,10 +63,10 @@ public class Board {
         this.lines = new Line[NUMBER_OF_DIRECTIONS][size];
         
         for (int i=0; i<size; i++) {
-            this.lines[0][i] = new Line("horizontal", i+1, size+2);
+            this.lines[0][i] = new Line(Const.HORIZONTAL, i+1, size+2);
         }
         for (int i=0; i<size; i++) {
-            this.lines[1][i] = new Line("vertical", i+1, size+2);
+            this.lines[1][i] = new Line(Const.VERTICAL, i+1, size+2);
         }
     }
 
@@ -83,13 +83,13 @@ public class Board {
         Line[][] line_copys = board_copy.getLines();
         for (int i=0; i<size; i++) {
             line_copys[0][i].setPiecePositions(
-                    lines[0][i].getPiece("red").getPosition(),
-                    lines[0][i].getPiece("black").getPosition());
+                    lines[0][i].getPiece(Const.RED).getPosition(),
+                    lines[0][i].getPiece(Const.BLACK).getPosition());
         }
         for (int i=0; i<size; i++) {
             line_copys[1][i].setPiecePositions(
-                    lines[1][i].getPiece("red").getPosition(),
-                    lines[1][i].getPiece("black").getPosition());
+                    lines[1][i].getPiece(Const.RED).getPosition(),
+                    lines[1][i].getPiece(Const.BLACK).getPosition());
         }
         return board_copy;
     }
@@ -104,9 +104,9 @@ public class Board {
         */
         for (Line line : lines[0]) { 
             x = line.getNumber();
-            y = line.getPiece("red").getPosition();
+            y = line.getPiece(Const.RED).getPosition();
             boardAsChars[x][y] = RED_HORIZONTAL;
-            y = line.getPiece("black").getPosition();
+            y = line.getPiece(Const.BLACK).getPosition();
             boardAsChars[x][y] = BLACK_HORIZONTAL;
         }
         /*
@@ -114,9 +114,9 @@ public class Board {
         */
         for (Line line: lines[1]) {
             y = line.getNumber();
-            x = line.getPiece("red").getPosition();
+            x = line.getPiece(Const.RED).getPosition();
             boardAsChars[x][y] = RED_VERTICAL;
-            x = line.getPiece("black").getPosition();
+            x = line.getPiece(Const.BLACK).getPosition();
             boardAsChars[x][y] = BLACK_VERTICAL;
         }
         

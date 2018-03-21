@@ -5,6 +5,8 @@
  */
 package slidingttt.logic;
 
+import java.security.InvalidParameterException;
+
 
 /**
  *
@@ -12,14 +14,15 @@ package slidingttt.logic;
  */
 public class Situation {
     
-    private static final boolean RED = true;
-    private static final boolean BLACK = false;
+    private static final int RED = 1;
+    private static final int BLACK = 2;
     private int reds_on_field;
     private int blacks_on_field;
     private boolean[][] red_positions;
     private boolean[][] black_positions;
     private final int size;
     private final Board board;
+    private int turn;
     
     public Situation(int size) {
         this.size = size;
@@ -29,10 +32,21 @@ public class Situation {
         
         red_positions = new boolean[size][size];
         black_positions = new boolean[size][size];
+        
+        turn = RED;
     }
     
-    public boolean alterSituation(String orientation, int line_number, int destination) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean move(String orientation, int line_number, int destination) {
+        int row;
+        switch (orientation) {
+            case "horizontal":  row = 0;
+                                break;
+            case "vertical":    row = 1;
+                                break;
+            default:            throw new InvalidParameterException("Orientation not in use.");
+        }
+        
+        return board.getLines()[row][line_number-1].move(turn, destination);
     }
     
     public boolean checkForThreeInARow() {
