@@ -23,7 +23,7 @@ public class PieceTest {
     }
     
     @Test
-    public void initilizationWorks() {
+    public void constructorWorks() {
         assertEquals(Const.RED, piece.getColor());
         assertEquals(Const.VERTICAL, piece.getOrientation());
     }

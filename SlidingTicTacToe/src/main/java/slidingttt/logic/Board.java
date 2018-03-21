@@ -62,11 +62,12 @@ public class Board {
     private void initializeLines() {
         this.lines = new Line[NUMBER_OF_DIRECTIONS][size];
         
+        //TODO: simplify
         for (int i=0; i<size; i++) {
-            this.lines[0][i] = new Line(Const.HORIZONTAL, i+1, size+2);
+            this.lines[0][i] = new Line(Const.HORIZONTAL, i, size+2);
         }
         for (int i=0; i<size; i++) {
-            this.lines[1][i] = new Line(Const.VERTICAL, i+1, size+2);
+            this.lines[1][i] = new Line(Const.VERTICAL, i, size+2);
         }
     }
 
@@ -81,6 +82,7 @@ public class Board {
     public Board getCopy() {
         Board board_copy = new Board(size);
         Line[][] line_copys = board_copy.getLines();
+        //TODO: simplify
         for (int i=0; i<size; i++) {
             line_copys[0][i].setPiecePositions(
                     lines[0][i].getPiece(Const.RED).getPosition(),

@@ -26,39 +26,27 @@ public class BoardTest {
     }
     
     @Test
-    public void initializationWorks() {
+    public void constructorSetsSizeCorrectly() {
         assertEquals(3, board.getSize());
         board = new Board(3);
         assertEquals(3, board.getSize());
     }
    
     @Test
-    public void initializationMakesTwoLineArraysOfCorrectSize() {
+    public void constructorMakesTwoLineArraysOfCorrectSize() {
         assertEquals(board.getSize(), board.getLines()[0].length);
         assertEquals(board.getSize(), board.getLines()[1].length);
     }
     
     @Test
-    public void initializationMakesLinesInTheRightPlace() {
-        initializationMakesLinesInTheRightPlace("horizontal", 0);
-        initializationMakesLinesInTheRightPlace("vertical", 1);
-    }
-    
-    private void initializationMakesLinesInTheRightPlace(String orientation, int place) {
-        for (int i=0; i<board.getSize()-1; i++) {
-            assertEquals(orientation, board.getLines()[place][i].getOrientation());
-        }
-    }
-    
-    @Test
-    public void initializationMakesLinesOfRightNumber() {
+    public void constructorMakesLinesOfRightNumber() {
         //random tests
-        assertEquals(3, board.getLines()[0][2].getNumber());
-        assertEquals(1, board.getLines()[1][0].getNumber());
+        assertEquals(2, board.getLines()[0][2].getNumber());
+        assertEquals(0, board.getLines()[1][0].getNumber());
     }
     
     @Test
-    public void initializationMakesLinesOfRightLength() {
+    public void constructorMakesLinesOfRightLength() {
         //random test
         assertEquals(5, board.getLines()[0][2].getLength());
     }

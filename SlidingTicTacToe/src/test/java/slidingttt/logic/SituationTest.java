@@ -24,18 +24,19 @@ public class SituationTest {
     }
     
     @Test
-    public void initializationWorks() {
+    public void constructorSetsSizeCorrectly() {
+        //TODO: check that even numbers are not allowed
         assertEquals(SIZE, situation.getSize());
     }
     
     @Test
-    public void initializationSetsPiecesOnFieldToZero() {
+    public void constructorSetsPiecesOnFieldToZero() {
         assertEquals(0, situation.getBlacksOnField());
         assertEquals(0, situation.getRedsOnField());
     }
     
     @Test
-    public void initializationSetsPositionsToNoPiecesOnField() {
+    public void constructorSetsPositionsToNoPiecesOnField() {
         //random tests
         assertEquals(false, situation.getRedPositions(SIZE-1, SIZE-1));
         assertEquals(false, situation.getBlackPositions(SIZE-1, SIZE-1));

@@ -23,33 +23,33 @@ public class LineTest {
     }
     
     @Test
-    public void initializationSetsCorrectNumberAndLength() {
+    public void constructorSetsCorrectNumberAndLength() {
         assertEquals(Const.VERTICAL, line.getOrientation());
         assertEquals(1, line.getNumber());
         assertEquals(5, line.getLength());
     }
     
     @Test
-    public void initializationSetsCorrectPieceColors() {
+    public void constructorSetsCorrectPieceColors() {
         assertEquals(Const.RED, line.getPiece(Const.RED).getColor());
         assertEquals(Const.BLACK, line.getPiece(Const.BLACK).getColor());
 
     }
     
     @Test
-    public void initializationSetsCorrectPieceOrientation() {
+    public void constructorSetsCorrectPieceOrientation() {
         assertEquals(line.getOrientation(), line.getPiece(Const.BLACK).getOrientation());
         assertEquals(line.getOrientation(), line.getPiece(Const.RED).getOrientation());
     }
     
     @Test
-    public void initializationSetsCorrectPiecePositions() {
+    public void constructorSetsCorrectPiecePositions() {
         assertEquals(0, line.getPiece(Const.RED).getPosition());
         assertEquals(4, line.getPiece(Const.BLACK).getPosition());
     }
     
     @Test
-    public void initializationLetsPiecesKnowEachOther() {
+    public void constructorLetsPiecesKnowEachOther() {
         assertEquals(0, line.getPiece(Const.BLACK).getOtherPiece().getPosition());
         assertEquals(4, line.getPiece(Const.RED).getOtherPiece().getPosition());
     }

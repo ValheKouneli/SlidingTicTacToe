@@ -36,17 +36,13 @@ public class Situation {
         turn = RED;
     }
     
-    public boolean move(String orientation, int line_number, int destination) {
-        int row;
-        switch (orientation) {
-            case "horizontal":  row = 0;
-                                break;
-            case "vertical":    row = 1;
-                                break;
-            default:            throw new InvalidParameterException("Orientation not in use.");
-        }
-        
-        return board.getLines()[row][line_number-1].move(turn, destination);
+    public boolean move(Move move) {
+        // does not check that the move color and the turn color match
+        int row = move.getOrientation();
+        int col = move.getLineNumber();
+        Line line = board.getLines()[row][col]; //line affected in the move
+        int dest = move.getTo();
+        return line.move(turn, dest);
     }
     
     public boolean checkForThreeInARow() {
