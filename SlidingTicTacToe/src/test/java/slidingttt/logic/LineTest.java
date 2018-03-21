@@ -23,37 +23,39 @@ public class LineTest {
     }
     
     @Test
-    public void initializationWorks() {
+    public void initializationSetsCorrectNumberAndLength() {
         assertEquals("vertical", line.getOrientation());
         assertEquals(1, line.getNumber());
         assertEquals(5, line.getLength());
     }
     
     @Test
-    public void settingBeginningPositionWorks() {
-        line.setBeginningPosition();
+    public void initializationSetsCorrectPieceColors() {
         assertEquals("red", line.getPiece("red").getColor());
         assertEquals("black", line.getPiece("black").getColor());
+
+    }
+    
+    @Test
+    public void initializationSetsCorrectPieceOrientation() {
         assertEquals(line.getOrientation(), line.getPiece("black").getOrientation());
         assertEquals(line.getOrientation(), line.getPiece("red").getOrientation());
+    }
+    
+    @Test
+    public void initializationSetsCorrectPiecePositions() {
         assertEquals(0, line.getPiece("red").getPosition());
-        assertEquals(0, line.getPiece("black").getOtherPiece().getPosition());
         assertEquals(4, line.getPiece("black").getPosition());
+    }
+    
+    @Test
+    public void initializationLetsPiecesKnowEachOther() {
+        assertEquals(0, line.getPiece("black").getOtherPiece().getPosition());
         assertEquals(4, line.getPiece("red").getOtherPiece().getPosition());
     }
     
     @Test
-    public void setPiecesWorks() {
-        Piece red = new Piece("green", "vertical");
-        Piece black = new Piece("purple", "vertical");
-        line.setPieces(red, black);
-        assertEquals("purple", line.getPiece("red").getOtherPiece().getColor());
-        assertEquals("green", line.getPiece("black").getOtherPiece().getColor());
-    }
-    
-    @Test
     public void getCopyWorks() {
-        line.setBeginningPosition();
         Line copy = line.getCopy();
         copy.getPiece("red").setPosition(3);
         assertEquals(0, line.getPiece("red").getPosition());

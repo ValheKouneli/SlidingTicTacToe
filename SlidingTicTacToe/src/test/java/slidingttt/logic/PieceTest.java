@@ -19,7 +19,7 @@ public class PieceTest {
     
     @Before
     public void setUp() {
-        piece = new Piece("red", "vertical");
+        piece = new Piece("red", "vertical", 0);
     }
     
     @Test
@@ -36,7 +36,7 @@ public class PieceTest {
     
     @Test
     public void settingOtherPieceWorks() {
-        Piece other = new Piece("black", "upside down");
+        Piece other = new Piece("black", "upside down", 0);
         piece.setOtherPiece(other);
         assertEquals("upside down", piece.getOtherPiece().getOrientation());
     }

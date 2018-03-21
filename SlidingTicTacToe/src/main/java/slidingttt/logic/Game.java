@@ -17,7 +17,6 @@ public class Game {
     
     public Game(int size) {
         board = new Board(size);
-        board.setBeginningPosition();
 
     }
     

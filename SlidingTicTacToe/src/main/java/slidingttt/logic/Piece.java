@@ -17,9 +17,10 @@ public class Piece {
     private Piece otherPieceOnTheSameLine;
     private final String orientation;
     
-    public Piece(String color, String orientation) {
+    public Piece(String color, String orientation, int position) {
         this.color = color;
         this.orientation = orientation;
+        this.position = position;
         this.otherPieceOnTheSameLine = null;
     }
     
@@ -56,9 +57,8 @@ public class Piece {
     }
     
     public Piece getCopy(){
-        Piece copy = new Piece(color, orientation);
+        Piece copy = new Piece(color, orientation, position);
         copy.setOtherPiece(otherPieceOnTheSameLine);
-        copy.setPosition(position);
         return copy;
     }
     

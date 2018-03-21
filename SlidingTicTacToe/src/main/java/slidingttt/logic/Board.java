@@ -41,6 +41,8 @@ public class Board {
         }
         this.size = size;
         
+        initializeLines();
+        
         emptyBoardRepresentation = new char[size+2][size+2];
         String topAndBottom = "" + CORNER;
         String middle = "" + BASE_HORIZONTAL;
@@ -57,27 +59,15 @@ public class Board {
         }
     }
 
-    /**
-     * Creates the lines of the game and sets them to the beginning position.
-     * Setting the line to the beginning position creates the pieces
-     * and sets them to the beginning position.
-     */
-    public void setBeginningPosition() {
+    private void initializeLines() {
         this.lines = new Line[NUMBER_OF_DIRECTIONS][size];
         
         for (int i=0; i<size; i++) {
             this.lines[0][i] = new Line("horizontal", i+1, size+2);
-            this.lines[0][i].setBeginningPosition();
         }
         for (int i=0; i<size; i++) {
             this.lines[1][i] = new Line("vertical", i+1, size+2);
-            this.lines[1][i].setBeginningPosition();
         }
-    }
-    
-    public void setLines(Line[][] lines) {
-        //does not check if the lines are of proper lenght
-        this.lines = lines;
     }
 
     public int getSize() {
@@ -90,14 +80,17 @@ public class Board {
     
     public Board getCopy() {
         Board board_copy = new Board(size);
-        Line[][] line_copys = new Line[NUMBER_OF_DIRECTIONS][size];
+        Line[][] line_copys = board_copy.getLines();
         for (int i=0; i<size; i++) {
-            line_copys[0][i] = lines[0][i].getCopy();
+            line_copys[0][i].setPiecePositions(
+                    lines[0][i].getPiece("red").getPosition(),
+                    lines[0][i].getPiece("black").getPosition());
         }
         for (int i=0; i<size; i++) {
-            line_copys[1][i] = lines[1][i].getCopy();
+            line_copys[1][i].setPiecePositions(
+                    lines[1][i].getPiece("red").getPosition(),
+                    lines[1][i].getPiece("black").getPosition());
         }
-        board_copy.setLines(line_copys);
         return board_copy;
     }
             

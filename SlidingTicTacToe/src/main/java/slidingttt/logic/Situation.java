@@ -24,10 +24,6 @@ public class Situation {
     public Situation(int size) {
         this.size = size;
         board = new Board(size);
-    }
-    
-    public void setBeginningSituation() {
-        board.setBeginningPosition();
         reds_on_field = 0;
         blacks_on_field = 0;
         
@@ -41,15 +37,6 @@ public class Situation {
     
     public boolean checkForThreeInARow() {
         throw new UnsupportedOperationException("Not supported yet.");
-    }
-    
-    public void setSituation(Line[][] lines, int reds_on_field, int blacks_on_field,
-            boolean[][] red_positions, boolean[][] black_positions) {
-        board.setLines(lines);
-        this.reds_on_field = reds_on_field;
-        this.blacks_on_field = blacks_on_field;
-        this.red_positions = red_positions;
-        this.black_positions = black_positions;
     }
     
     public int getBlacksOnField() {
