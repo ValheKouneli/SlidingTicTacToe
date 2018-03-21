@@ -42,8 +42,8 @@ public class Piece {
     public Piece getOtherPiece() {
         return otherPiece;
     }
-    public boolean setPosition(int destinaton) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void setPosition(int position) {
+        this.position = position;
     }
     
     public Piece getCopy(){

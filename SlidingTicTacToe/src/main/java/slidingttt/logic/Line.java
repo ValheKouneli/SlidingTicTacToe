@@ -48,10 +48,12 @@ public class Line {
         black.setPosition(black_position);
     }
     
-    public boolean move(int color, int destination) {
+    public void move(int color, int destination) {
         switch (color) {
-            case Const.RED:     return red.setPosition(destination);
-            case Const.BLACK:   return black.setPosition(destination);
+            case Const.RED:     red.setPosition(destination);
+                                break;
+            case Const.BLACK:   black.setPosition(destination);
+                                break;
             default:        throw new InvalidParameterException("Color not in use.");
         }
     }

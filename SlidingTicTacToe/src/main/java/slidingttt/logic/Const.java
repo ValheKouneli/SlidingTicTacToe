@@ -15,6 +15,7 @@ public class Const {
     
     public static final int RED = 0;
     public static final int BLACK = 1;
+    public static final int NO_COLOR = -1;
     public static final int HORIZONTAL = 0;
     public static final int VERTICAL = 1;
     public static final int NUMBER_OF_COLORS = 2;

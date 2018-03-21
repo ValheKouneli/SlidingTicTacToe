@@ -31,15 +31,15 @@ public class SituationTest {
     
     @Test
     public void constructorSetsPiecesOnFieldToZero() {
-        assertEquals(0, situation.getBlacksOnField());
-        assertEquals(0, situation.getRedsOnField());
+        assertEquals(0, situation.getPiecesOnField(Const.BLACK));
+        assertEquals(0, situation.getPiecesOnField(Const.RED));
     }
     
     @Test
     public void constructorSetsPositionsToNoPiecesOnField() {
         //random tests
-        assertEquals(false, situation.getRedPositions(SIZE-1, SIZE-1));
-        assertEquals(false, situation.getBlackPositions(SIZE-1, SIZE-1));
+        assertEquals(false, situation.getPiecePositions(Const.RED, SIZE-1, SIZE-1));
+        assertEquals(false, situation.getPiecePositions(Const.BLACK, SIZE-1, SIZE-1));
     }
     
     //@Test
