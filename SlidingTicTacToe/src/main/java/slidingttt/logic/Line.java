@@ -38,6 +38,8 @@ public class Line {
         }
         red = new Piece(Const.RED, orientation, red_position);
         black = new Piece(Const.BLACK, orientation, black_position);
+        red.setOtherPiece(black);
+        black.setOtherPiece(red);
 
     }
     

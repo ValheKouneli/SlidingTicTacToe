@@ -15,6 +15,7 @@ public class Piece {
     private final int color;
     private int position;
     private final int orientation;
+    private Piece otherPiece; //the other Piece on the same Line
     
     public Piece(int color, int orientation, int position) {
         this.color = color;
@@ -22,6 +23,9 @@ public class Piece {
         this.position = position;
     }
     
+    public void setOtherPiece(Piece piece) {
+        this.otherPiece = piece;
+    }
     
     public int getColor() {
         return color;
