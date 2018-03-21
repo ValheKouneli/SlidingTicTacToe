@@ -91,9 +91,17 @@ public class BoardTest {
         assertEquals("green", board.getLines()[1][0].getOrientation());
     }
     
-    @Test
+    //@Test
     public void setSituationWorks() {
         Situation situation = new Situation(board.getSize());
+        //TODO
+        board.setSituation(situation);
+        assertEquals(board.getSize(), board.getSituation().getSize());
+    }
+    
+    //@Test
+    public void getCopyWorks() {
+        //TODO
     }
     
     

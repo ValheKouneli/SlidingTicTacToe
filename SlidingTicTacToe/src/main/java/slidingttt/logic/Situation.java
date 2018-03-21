@@ -60,12 +60,12 @@ public class Situation {
         return reds_on_field;
     }
     
-    public boolean[][] getRedPositions() {
-        return red_positions;
+    public boolean getRedPositions(int x, int y) {
+        return red_positions[x][y];
     }
     
-    public boolean[][] getBlackPositions() {
-        return black_positions;
+    public boolean getBlackPositions(int x, int y) {
+        return black_positions[x][y];
     }
     
     public Situation getCopy(){
