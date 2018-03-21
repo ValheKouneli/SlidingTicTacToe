@@ -50,32 +50,45 @@ public class Situation {
         return moveHelp(move, Const.UNDO);
     }
     
-    private boolean moveHelp(Move move, int direction) {
+    /** Makes a move on Situation.board.
+     * 
+     * @param move      move to be executed
+     * @param doOrUndo  whether move is Const.Do or Const.UNDO
+     * @return          whether move is legal
+     */
+    private boolean moveHelp(Move move, int doOrUndo) {
         int orientation = move.getOrientation();
-        int index = move.getLineNumber();
-        int dest;
-        int orig;
+        int index = move.getLineIndex();
+        
+        int destPointOnLine; //info got from Move
+        int origPointInLine; //info got from Move
+        
         int row_from;
         int col_from;
         int row_to;
         int col_to;
+        
         int size = board.getSize();
         int color = move.getColor();
-        Line line = board.getLines()[orientation][index]; //line affected in the move
+        
+        //TODO getLine(orientation, index)
+        Line line = board.getLines()[orientation][index]; //line affected in 
+                                                          //the move
         Piece movingPiece = line.getPiece(color);
         Piece oppositePiece = movingPiece.getOtherPiece();
-        int posNow = movingPiece.getPosition();
+        
+        int piecesPositionNow = movingPiece.getPosition(); 
         boolean turnMatchesMovingPiece;
         int newPiecesToField = 0;
         
         
-        switch (direction) {
-            case Const.DO:      dest = move.getTo();
-                                orig = move.getFrom();
+        switch (doOrUndo) {
+            case Const.DO:      destPointOnLine = move.getTo();
+                                origPointInLine = move.getFrom();
                                 turnMatchesMovingPiece = true;
                                 break;
-            case Const.UNDO:    dest = move.getFrom();
-                                orig = move.getTo();
+            case Const.UNDO:    destPointOnLine = move.getFrom();
+                                origPointInLine = move.getTo();
                                 turnMatchesMovingPiece = false;
                                 break;
             default:            throw new InvalidParameterException("Color not in use.");
@@ -84,19 +97,19 @@ public class Situation {
         
         switch (orientation) {
             case Const.HORIZONTAL:  row_to = index;
-                                    col_to = dest;
+                                    col_to = destPointOnLine;
                                     row_from = index;
-                                    col_from = posNow;
+                                    col_from = piecesPositionNow;
                                     break;
-            case Const.VERTICAL:    row_to = dest;
+            case Const.VERTICAL:    row_to = destPointOnLine;
                                     col_to = index;
-                                    row_from = posNow;
+                                    row_from = piecesPositionNow;
                                     col_from = index;
                                     break;
             default:                throw new InvalidParameterException("Orientation not in use.");
         }
         
-        if (orig != posNow) {
+        if (origPointInLine != piecesPositionNow) {
             //throw new InvalidParameterException("Move.from does not match "
              //       + "current position of the Piece being moved.");
         }
@@ -105,7 +118,7 @@ public class Situation {
             //        + "turn.");
         }
         
-        if ((orig == 0 || orig == size+2) && (0 < dest && dest < size+2)) {
+        if ((origPointInLine == 0 || origPointInLine == size+2) && (0 < destPointOnLine && destPointOnLine < size+2)) {
             if (piecesOnField[color] == 3) {
                 return false;
             } else {
@@ -118,11 +131,11 @@ public class Situation {
             return false;
         }
         
-        if (pieceIsTryingToPassAnother(orig, dest, oppositePiece.getPosition())) {
+        if (pieceIsTryingToPassAnother(origPointInLine, destPointOnLine, oppositePiece.getPosition())) {
             return false;
         } 
         
-        line.move(color, dest);
+        line.move(color, destPointOnLine);
         piecePositions[color][row_from][col_from] = false;
         piecePositions[color][row_to][col_to] = true;
         piecesOnField[color] += newPiecesToField;

@@ -15,23 +15,23 @@ public class Move {
     private final int from;
     private final int to;
     private final int orientation;
-    private final int line_number;
+    private final int lineIndex;
     private final int color;
     
-    public Move(int color, int orientation, int line_number, int from, int to) {
+    public Move(int color, int orientation, int lineIndex, int from, int to) {
         this.color = color;
         this.orientation = orientation;
         this.from = from;
         this.to = to;
-        this.line_number = line_number;
+        this.lineIndex = lineIndex;
     }
     
     public int getOrientation() {
         return orientation;
     }
     
-    public int getLineNumber() {
-        return line_number;
+    public int getLineIndex() {
+        return lineIndex;
     }
     
     public int getColor() {
@@ -44,6 +44,14 @@ public class Move {
     
     public int getTo() {
         return to;
+    }
+    
+    public Move getCopy() {
+        return new Move(color, orientation, lineIndex, from, to);
+    }
+    
+    public Move getOppositeMove() {
+        return new Move(color, orientation, lineIndex, to, from);
     }
     
 }
