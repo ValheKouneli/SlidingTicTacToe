@@ -38,8 +38,6 @@ public class Line {
         }
         red = new Piece(Const.RED, orientation, red_position);
         black = new Piece(Const.BLACK, orientation, black_position);
-        red.setOtherPiece(black);
-        black.setOtherPiece(red);
 
     }
     
@@ -50,9 +48,19 @@ public class Line {
     
     public boolean move(int color, int destination) {
         switch (color) {
-            case Const.RED:     return red.move(destination);
-            case Const.BLACK:   return black.move(destination);
+            case Const.RED:     return red.setPosition(destination);
+            case Const.BLACK:   return black.setPosition(destination);
             default:        throw new InvalidParameterException("Color not in use.");
+        }
+    }
+    
+    public int getColorInPosition(int position) {
+        if (red.getPosition() == position) {
+            return Const.RED;
+        } else if (black.getPosition() == position) {
+            return Const.BLACK;
+        } else {
+            return Const.NO_COLOR;
         }
     }
     

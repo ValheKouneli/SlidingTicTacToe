@@ -33,14 +33,7 @@ public class PieceTest {
         piece.setPosition(3);
         assertEquals(3, piece.getPosition());
     }
-    
-    @Test
-    public void settingOtherPieceWorks() {
-        Piece other = new Piece(Const.BLACK, 123, 0);
-        piece.setOtherPiece(other);
-        assertEquals(123, piece.getOtherPiece().getOrientation());
-    }
-    
+
     @Test
     public void getCopyWorks() {
         piece.setPosition(0);

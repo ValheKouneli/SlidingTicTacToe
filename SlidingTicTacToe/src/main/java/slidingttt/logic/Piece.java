@@ -14,19 +14,14 @@ public class Piece {
     
     private final int color;
     private int position;
-    private Piece otherPieceOnTheSameLine;
     private final int orientation;
     
     public Piece(int color, int orientation, int position) {
         this.color = color;
         this.orientation = orientation;
         this.position = position;
-        this.otherPieceOnTheSameLine = null;
     }
     
-    public void setOtherPiece(Piece otherPieceOnTheSameLine) {
-        this.otherPieceOnTheSameLine = otherPieceOnTheSameLine;
-    }
     
     public int getColor() {
         return color;
@@ -40,26 +35,12 @@ public class Piece {
         return position;
     }
     
-    //possibly redundant
-    public void setPosition(int position){
-        this.position = position;
-    }
-    
-    public boolean move(int destinaton) {
+    public boolean setPosition(int destinaton) {
         throw new UnsupportedOperationException("Not supported yet.");
-    }
-    
-    public Move[] getPossibleMoves(int reds_on_field, int blacks_on_field) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-    
-    public Piece getOtherPiece() {
-        return otherPieceOnTheSameLine;
     }
     
     public Piece getCopy(){
         Piece copy = new Piece(color, orientation, position);
-        copy.setOtherPiece(otherPieceOnTheSameLine);
         return copy;
     }
     

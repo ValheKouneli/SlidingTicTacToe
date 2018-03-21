@@ -49,12 +49,6 @@ public class LineTest {
     }
     
     @Test
-    public void constructorLetsPiecesKnowEachOther() {
-        assertEquals(0, line.getPiece(Const.BLACK).getOtherPiece().getPosition());
-        assertEquals(4, line.getPiece(Const.RED).getOtherPiece().getPosition());
-    }
-    
-    @Test
     public void getCopyWorks() {
         Line copy = line.getCopy();
         copy.getPiece(Const.RED).setPosition(3);
