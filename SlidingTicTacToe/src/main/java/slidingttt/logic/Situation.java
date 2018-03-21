@@ -26,7 +26,7 @@ public class Situation {
     public Situation(int size) {
         board = new Board(size);
         piecesOnField = new int[Const.NUMBER_OF_COLORS];
-        piecePositions = new boolean[Const.NUMBER_OF_COLORS][size][size];
+        piecePositions = new boolean[Const.NUMBER_OF_COLORS][size+2][size+2];
         
         turn = RED;
     }
@@ -101,8 +101,8 @@ public class Situation {
              //       + "current position of the Piece being moved.");
         }
         if ((turn == movingPiece.getColor()) == turnMatchesMovingPiece) {
-            throw new InvalidParameterException("Move.color does not match "
-                    + "turn.");
+            //throw new InvalidParameterException("Move.color does not match "
+            //        + "turn.");
         }
         
         if ((orig == 0 || orig == size+2) && (0 < dest && dest < size+2)) {
