@@ -26,7 +26,6 @@ public class Board {
     
     private final int size;
     private Line[][] lines;
-    private Situation situation;
     private final char[][] emptyBoardRepresentation;
 
     /**
@@ -74,9 +73,6 @@ public class Board {
             this.lines[1][i] = new Line("vertical", i+1, size+2);
             this.lines[1][i].setBeginningPosition();
         }
-        
-        this.situation = new Situation(size);
-        this.situation.setBeginningSituation();
     }
     
     public void setLines(Line[][] lines) {
@@ -92,14 +88,6 @@ public class Board {
         return lines;
     }
     
-    public Situation getSituation() {
-        return situation;
-    }
-    
-    public void setSituation(Situation situation) {
-        this.situation = situation;
-    }
-    
     public Board getCopy() {
         Board board_copy = new Board(size);
         Line[][] line_copys = new Line[NUMBER_OF_DIRECTIONS][size];
@@ -110,7 +98,6 @@ public class Board {
             line_copys[1][i] = lines[1][i].getCopy();
         }
         board_copy.setLines(line_copys);
-        board_copy.setSituation(situation.getCopy());
         return board_copy;
     }
             

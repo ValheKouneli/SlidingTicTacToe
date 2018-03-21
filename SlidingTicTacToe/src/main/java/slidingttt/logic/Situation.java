@@ -11,7 +11,7 @@ import java.util.Arrays;
  *
  * @author Valhe Kouneli
  */
-public class Situation {
+public class Situation extends Board {
     
     private static final boolean RED = true;
     private static final boolean BLACK = false;
@@ -19,15 +19,15 @@ public class Situation {
     private int blacks_on_field;
     private boolean[][] red_positions;
     private boolean[][] black_positions;
-    private final int size;
     
     public Situation(int size) {
-        this.size = size;
+        super(size);
     }
     
     public void setBeginningSituation() {
         reds_on_field = 0;
         blacks_on_field = 0;
+        int size = super.getSize();
         red_positions = new boolean[size][size];
         black_positions = new boolean[size][size];
     }
@@ -48,10 +48,6 @@ public class Situation {
         this.black_positions = black_positions;
     }
     
-    public int getSize() {
-        return size;
-    }
-    
     public int getBlacksOnField() {
         return blacks_on_field;
     }
@@ -68,7 +64,9 @@ public class Situation {
         return black_positions[x][y];
     }
     
+    @Override
     public Situation getCopy(){
+        int size = super.getSize();
         Situation copy = new Situation(size);
         copy.setSituation(reds_on_field, blacks_on_field, Arrays.copyOf(red_positions, size), Arrays.copyOf(black_positions, size));
         return copy;

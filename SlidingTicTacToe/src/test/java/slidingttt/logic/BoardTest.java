@@ -68,18 +68,6 @@ public class BoardTest {
     }
     
     @Test
-    public void setBeginningPositionMakesNewSituation() {
-        board.setBeginningPosition();
-        assertEquals(board.getSize(), board.getSituation().getSize());
-    }
-    
-    @Test
-    public void setBeginningPositionSetsSituationToBeginning() {
-        board.setBeginningPosition();
-        assertEquals(0, board.getSituation().getRedsOnField());
-    }
-    
-    @Test
     public void setLinesWorks() {
         Line horizontal = new Line("purple", 1, 3);
         Line vertical = new Line("green", 1, 3);
@@ -91,13 +79,6 @@ public class BoardTest {
         assertEquals("green", board.getLines()[1][0].getOrientation());
     }
     
-    //@Test
-    public void setSituationWorks() {
-        Situation situation = new Situation(board.getSize());
-        //TODO
-        board.setSituation(situation);
-        assertEquals(board.getSize(), board.getSituation().getSize());
-    }
     
     //@Test
     public void getCopyWorks() {

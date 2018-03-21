@@ -13,13 +13,12 @@ import java.util.Scanner;
 public class Game {
     
     private Board board;
-    private Situation situation;
     
     
     public Game(int size) {
         board = new Board(size);
         board.setBeginningPosition();
-        situation = board.getSituation();
+
     }
     
     public void start() {
