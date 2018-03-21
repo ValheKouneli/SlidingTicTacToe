@@ -22,11 +22,11 @@ public class Board {
     static final char BASE_VERTICAL = '|';
     static final char BASE_HORIZONTAL = '–';
     
-    static final int NUMBER_OF_DIRECTIONS = 2;
+
     
     private final int size;
     private Line[][] lines;
-    private final char[][] emptyBoardRepresentation;
+    private char[][] emptyBoardRepresentation;
 
     /**
      * Creates a STTT board with size amount of horizontal and vertical lines.
@@ -43,6 +43,10 @@ public class Board {
         
         initializeLines();
         
+        setEmptyBoardRepresentation();
+    }
+    
+    private void setEmptyBoardRepresentation() {
         emptyBoardRepresentation = new char[size+2][size+2];
         String topAndBottom = "" + CORNER;
         String middle = "" + BASE_HORIZONTAL;
@@ -60,7 +64,7 @@ public class Board {
     }
 
     private void initializeLines() {
-        this.lines = new Line[NUMBER_OF_DIRECTIONS][size];
+        this.lines = new Line[Const.NUMBER_OF_ORIENTATIONS][size];
         
         //TODO: simplify
         for (int i=0; i<size; i++) {
@@ -79,6 +83,12 @@ public class Board {
         return lines;
     }
     
+    /**
+     * TODO.
+     * Makes a new Board with beginning set-up and then moves the Pieces
+     * to the same positions as the current board.
+     * @return  Copy of the Board.
+     */
     public Board getCopy() {
         Board board_copy = new Board(size);
         Line[][] line_copys = board_copy.getLines();
@@ -101,6 +111,7 @@ public class Board {
         char[][] boardAsChars = Arrays.copyOf(emptyBoardRepresentation, size+2);
         int x;
         int y;
+        //TODO: simplify
         /*
         * Horizontal lines
         */
@@ -122,6 +133,9 @@ public class Board {
             boardAsChars[x][y] = BLACK_VERTICAL;
         }
         
+        /*
+        * Create a string based on the char array boardAsChars.
+        */
         String temp = "";
         for (int i=0; i<size+2; i++) {
             for (int j=0; j<size+2; j++) {

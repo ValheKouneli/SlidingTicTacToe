@@ -40,6 +40,7 @@ public class Piece {
         return position;
     }
     
+    //possibly redundant
     public void setPosition(int position){
         this.position = position;
     }
@@ -48,7 +49,7 @@ public class Piece {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
-    public int[] getPossibleMoves(int reds_on_field, int blacks_on_field) {
+    public Move[] getPossibleMoves(int reds_on_field, int blacks_on_field) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     

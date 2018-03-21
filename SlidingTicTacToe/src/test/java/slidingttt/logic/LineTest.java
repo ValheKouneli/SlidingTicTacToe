@@ -19,13 +19,13 @@ public class LineTest {
     
     @Before
     public void setUp() {
-        line = new Line(Const.VERTICAL, 1, 5);
+        line = new Line(Const.VERTICAL, 0, 5);
     }
     
     @Test
-    public void constructorSetsCorrectNumberAndLength() {
+    public void constructorSetsCorrectIndexAndLength() {
         assertEquals(Const.VERTICAL, line.getOrientation());
-        assertEquals(1, line.getNumber());
+        assertEquals(0, line.getNumber());
         assertEquals(5, line.getLength());
     }
     

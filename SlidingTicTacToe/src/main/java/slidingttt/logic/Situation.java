@@ -18,14 +18,14 @@ public class Situation {
     private static final int BLACK = 2;
     private int reds_on_field;
     private int blacks_on_field;
+    //TODO: simplify: only one int(!) array, number tells if occupied and
+    //by what color
     private boolean[][] red_positions;
     private boolean[][] black_positions;
-    private final int size;
     private final Board board;
     private int turn;
     
     public Situation(int size) {
-        this.size = size;
         board = new Board(size);
         reds_on_field = 0;
         blacks_on_field = 0;
@@ -36,12 +36,32 @@ public class Situation {
         turn = RED;
     }
     
+    //TODO: change turn
     public boolean move(Move move) {
         // does not check that the move color and the turn color match
+        return moveHelp(move, Const.DO);
+    }
+    
+    //TODO: change turn
+    public boolean undoMove(Move move) {
+        // does not check that the move color and the turn color match
+        return moveHelp(move, Const.UNDO);
+    }
+    
+    private boolean moveHelp(Move move, int direction) {
         int row = move.getOrientation();
         int col = move.getLineNumber();
+        int dest;
         Line line = board.getLines()[row][col]; //line affected in the move
-        int dest = move.getTo();
+        switch (direction) {
+            case Const.DO:      dest = move.getTo();
+                                break;
+            case Const.UNDO:    dest = move.getFrom();
+                                break;
+            default:            throw new InvalidParameterException("Color not in use.");
+            
+        }
+        
         return line.move(turn, dest);
     }
     
@@ -66,7 +86,7 @@ public class Situation {
     }
     
     public int getSize() {
-        return size;
+        return board.getSize();
     }
     
     public Situation getCopy(){

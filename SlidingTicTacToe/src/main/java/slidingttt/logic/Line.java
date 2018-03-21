@@ -14,30 +14,33 @@ import java.security.InvalidParameterException;
 public class Line {
     
     private final int length;
-    private final int number;
+    private final int index;
     private Piece red;
     private Piece black;
     private final int orientation;
     
-    public Line(int orientation, int number, int length){
+    public Line(int orientation, int index, int length){
         this.orientation = orientation;
         this.length = length;
-        this.number = number;
+        this.index = index;
         setBeginningPosition();
     }
     
     private void setBeginningPosition() {
-        red = new Piece(Const.RED, orientation, 0);
-        black = new Piece(Const.BLACK, orientation, 0);
+        int red_position;
+        int black_position;
+        if (index % 2 == 0) {
+            red_position = 0;
+            black_position = length-1;
+        } else {
+            red_position = length-1;
+            black_position = 0;
+        }
+        red = new Piece(Const.RED, orientation, red_position);
+        black = new Piece(Const.BLACK, orientation, black_position);
         red.setOtherPiece(black);
         black.setOtherPiece(red);
-        if (number % 2 == 1) {
-            red.setPosition(0);
-            black.setPosition(length-1);
-        } else {
-            black.setPosition(0);
-            red.setPosition(length-1);
-        }
+
     }
     
     public void setPiecePositions(int red_position, int black_position) {
@@ -66,7 +69,7 @@ public class Line {
     }
     
     public int getNumber() {
-        return number;
+        return index;
     }
     
     public int getLength() {
@@ -74,7 +77,7 @@ public class Line {
     }
     
     public Line getCopy() {
-        Line copy = new Line(orientation, number, length);
+        Line copy = new Line(orientation, index, length);
         copy.setPiecePositions(red.getPosition(), black.getPosition());
         return copy;
     }
