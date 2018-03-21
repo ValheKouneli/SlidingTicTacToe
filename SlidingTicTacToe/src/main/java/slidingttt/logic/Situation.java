@@ -97,9 +97,10 @@ public class Situation {
         }
         
         if (orig != posNow) {
-            throw new InvalidParameterException("Move.from does not match "
-                    + "current position of the Piece being moved.");
-        } else if ((turn == movingPiece.getColor()) == turnMatchesMovingPiece) {
+            //throw new InvalidParameterException("Move.from does not match "
+             //       + "current position of the Piece being moved.");
+        }
+        if ((turn == movingPiece.getColor()) == turnMatchesMovingPiece) {
             throw new InvalidParameterException("Move.color does not match "
                     + "turn.");
         }
@@ -152,6 +153,10 @@ public class Situation {
     public Situation getCopy(){
         throw new UnsupportedOperationException("Not supported yet.");
     }
+    
+    public int getTurn() {
+        return turn;
+    }
 
     //Problem: how can one get the position of the other piece
     //on the same line now?
@@ -159,6 +164,11 @@ public class Situation {
             int otherPiecesPosition) {
         return (orig < otherPiecesPosition && otherPiecesPosition < dest) ||
                 (dest < otherPiecesPosition && otherPiecesPosition < dest);
+    }
+    
+    @Override
+    public String toString(){
+        return board.toString();
     }
     
     

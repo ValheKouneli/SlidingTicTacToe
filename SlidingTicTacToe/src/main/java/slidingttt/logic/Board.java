@@ -116,7 +116,7 @@ public class Board {
         * Horizontal lines
         */
         for (Line line : lines[0]) { 
-            x = line.getNumber();
+            x = line.getNumber()+1;
             y = line.getPiece(Const.RED).getPosition();
             boardAsChars[x][y] = RED_HORIZONTAL;
             y = line.getPiece(Const.BLACK).getPosition();
@@ -126,7 +126,7 @@ public class Board {
         * Vertical lines
         */
         for (Line line: lines[1]) {
-            y = line.getNumber();
+            y = line.getNumber()+1;
             x = line.getPiece(Const.RED).getPosition();
             boardAsChars[x][y] = RED_VERTICAL;
             x = line.getPiece(Const.BLACK).getPosition();
