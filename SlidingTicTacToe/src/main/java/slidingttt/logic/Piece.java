@@ -39,6 +39,9 @@ public class Piece {
         return position;
     }
     
+    public Piece getOtherPiece() {
+        return otherPiece;
+    }
     public boolean setPosition(int destinaton) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
