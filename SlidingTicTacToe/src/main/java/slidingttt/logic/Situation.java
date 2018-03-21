@@ -38,12 +38,19 @@ public class Situation {
     
     //TODO: change turn
     public boolean move(Move move) {
+        if (turn != move.getColor()) {
+            throw new InvalidParameterException("Move does not match turn.");
+        }
         // does not check that the move color and the turn color match
         return moveHelp(move, Const.DO);
     }
     
     //TODO: change turn
     public boolean undoMove(Move move) {
+        if (turn == move.getColor()) {
+            throw new InvalidParameterException("Undo-move matches turn"
+                    + "but it should't.");
+        }
         // does not check that the move color and the turn color match
         return moveHelp(move, Const.UNDO);
     }
@@ -52,17 +59,44 @@ public class Situation {
         int row = move.getOrientation();
         int col = move.getLineNumber();
         int dest;
+        int orig;
+        int size = board.getSize();
+        int pieces_on_field;
+        //TODO: simplify
+        switch (turn) {
+            case RED:   pieces_on_field = reds_on_field;
+                        break;
+            case BLACK: pieces_on_field = blacks_on_field;
+                        break;
+            default:    throw new InvalidParameterException("Color not in use.");
+        }
+        
         Line line = board.getLines()[row][col]; //line affected in the move
+        
         switch (direction) {
             case Const.DO:      dest = move.getTo();
+                                orig = move.getFrom();
                                 break;
             case Const.UNDO:    dest = move.getFrom();
+                                orig = move.getTo();
                                 break;
             default:            throw new InvalidParameterException("Color not in use.");
             
         }
         
-        return line.move(turn, dest);
+        if (pieces_on_field == 3 &&
+                (orig == 0 || orig == size+2) && (0 < dest && dest < size+2)) {
+            return false;
+        } else if (red_positions[row][col] || black_positions[row][col]) {
+            return false;
+        } else if (pieceIsTryingToPassAnother()) {
+            return false;
+        } else {
+            line.move(turn, dest);
+            return true;
+        }
+        
+        
     }
     
     public boolean checkForThreeInARow() {
@@ -91,6 +125,12 @@ public class Situation {
     
     public Situation getCopy(){
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    //Problem: how can one get the position of the other piece
+    //on the same line now?
+    private boolean pieceIsTryingToPassAnother() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
