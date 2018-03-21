@@ -22,5 +22,6 @@ public class Const {
     public static final int NUMBER_OF_ORIENTATIONS = 2;
     public static final int DO = 0;
     public static final int UNDO = 1;
+    public static final int MAX_NUMBER_ON_FIELD = 3;
     
 }

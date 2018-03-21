@@ -31,117 +31,89 @@ public class Situation {
         turn = RED;
     }
     
-    //TODO: change turn
     public boolean move(Move move) {
-        if (turn != move.getColor()) {
-            throw new InvalidParameterException("Move does not match turn.");
-        }
-        // does not check that the move color and the turn color match
-        return moveHelp(move, Const.DO);
-    }
-    
-    //TODO: change turn
-    public boolean undoMove(Move move) {
-        if (turn == move.getColor()) {
-            throw new InvalidParameterException("Undo-move matches turn"
-                    + "but it should't.");
-        }
-        // does not check that the move color and the turn color match
-        return moveHelp(move, Const.UNDO);
-    }
-    
-    /** Makes a move on Situation.board.
-     * 
-     * @param move      move to be executed
-     * @param doOrUndo  whether move is Const.Do or Const.UNDO
-     * @return          whether move is legal
-     */
-    private boolean moveHelp(Move move, int doOrUndo) {
-        int orientation = move.getOrientation();
-        int index = move.getLineIndex();
         
-        int destPointOnLine; //info got from Move
-        int origPointInLine; //info got from Move
+        Piece pieceToBeMoved = board.getLine(move.getOrientation(), 
+                                             move.getLineIndex())
+                .getPiece(move.getColor());
         
-        int row_from;
-        int col_from;
-        int row_to;
-        int col_to;
+        int piecesPositionNow = pieceToBeMoved.getPosition();
+        int piecesNewPosition = move.getTo();
         
-        int size = board.getSize();
-        int color = move.getColor();
+        int otherPiecesPosition = pieceToBeMoved.getOtherPiece().getPosition();
         
-        //TODO getLine(orientation, index)
-        Line line = board.getLines()[orientation][index]; //line affected in 
-                                                          //the move
-        Piece movingPiece = line.getPiece(color);
-        Piece oppositePiece = movingPiece.getOtherPiece();
+        int piecesXcoordinateFrom;
+        int piecesYcoordinateFrom;
+        int piecesXcoordinateTo;
+        int piecesYcoordinateTo;
         
-        int piecesPositionNow = movingPiece.getPosition(); 
-        boolean turnMatchesMovingPiece;
-        int newPiecesToField = 0;
-        
-        
-        switch (doOrUndo) {
-            case Const.DO:      destPointOnLine = move.getTo();
-                                origPointInLine = move.getFrom();
-                                turnMatchesMovingPiece = true;
-                                break;
-            case Const.UNDO:    destPointOnLine = move.getFrom();
-                                origPointInLine = move.getTo();
-                                turnMatchesMovingPiece = false;
-                                break;
-            default:            throw new InvalidParameterException("Color not in use.");
-            
+        switch (move.getOrientation()) {
+            case Const.HORIZONTAL :     piecesXcoordinateFrom = move.getLineIndex()+1;
+                                        piecesYcoordinateFrom = piecesPositionNow;
+                                        piecesXcoordinateTo = move.getLineIndex()+1;
+                                        piecesYcoordinateTo = piecesNewPosition;
+                                        break;
+            case Const.VERTICAL :       piecesXcoordinateFrom = piecesPositionNow;
+                                        piecesYcoordinateFrom = move.getLineIndex()+1;
+                                        piecesXcoordinateTo = piecesNewPosition;
+                                        piecesYcoordinateTo = move.getLineIndex()+1;
+                                        break;
+            default :                   throw new InvalidParameterException("Orientation not in use.");
         }
         
-        switch (orientation) {
-            case Const.HORIZONTAL:  row_to = index;
-                                    col_to = destPointOnLine;
-                                    row_from = index;
-                                    col_from = piecesPositionNow;
-                                    break;
-            case Const.VERTICAL:    row_to = destPointOnLine;
-                                    col_to = index;
-                                    row_from = piecesPositionNow;
-                                    col_from = index;
-                                    break;
-            default:                throw new InvalidParameterException("Orientation not in use.");
+        int newPiecesOnField = 0; // intrinsically, a move does not bring
+                                  // new pieces to field
+        if (piecesPositionNow == 0 || piecesPositionNow == board.getSize()+1) {
+            //no need to check if piece ends up in another base; not possible
+            newPiecesOnField = 1;
+
         }
         
-        if (origPointInLine != piecesPositionNow) {
-            //throw new InvalidParameterException("Move.from does not match "
-             //       + "current position of the Piece being moved.");
-        }
-        if ((turn == movingPiece.getColor()) == turnMatchesMovingPiece) {
-            //throw new InvalidParameterException("Move.color does not match "
-            //        + "turn.");
-        }
+//        /* 
+//        * check to make sure the move makes sense
+//        */
+//        if (piecesPositionNow != move.getFrom()) {
+//            throw new InvalidParameterException("Move.form does not match "
+//                    + "moving piece's current position.");
+//        }
         
-        if ((origPointInLine == 0 || origPointInLine == size+2) && (0 < destPointOnLine && destPointOnLine < size+2)) {
-            if (piecesOnField[color] == 3) {
-                return false;
-            } else {
-                newPiecesToField = 1;
-            }
+        /*
+        * move is illegal if moved piece passes other piece on the same line
+        */
+        if (pieceIsTryingToPassAnother(piecesPositionNow, piecesNewPosition, 
+                otherPiecesPosition)) {
+            return false;
         }
-        
-        if (piecePositions[0][row_to][col_to] || piecePositions[1][row_to][col_to]) {
-            //check if destination space is empty
+ 
+        /*
+        * move is illegal if if brings more than MAX_NUMBER_ON_FIELD pieces
+        */
+        if (newPiecesOnField > 0 && piecesOnField[move.getColor()] == Const.MAX_NUMBER_ON_FIELD) {
             return false;
         }
         
-        if (pieceIsTryingToPassAnother(origPointInLine, destPointOnLine, oppositePiece.getPosition())) {
+        /*
+        * move is illegal if the destination spot is occupied
+        */
+        if (piecePositions[Const.RED][piecesXcoordinateTo]
+                                     [piecesYcoordinateTo] ||
+                piecePositions[Const.BLACK][piecesXcoordinateTo]
+                                           [piecesYcoordinateTo]) {
             return false;
-        } 
+        }
         
-        line.move(color, destPointOnLine);
-        piecePositions[color][row_from][col_from] = false;
-        piecePositions[color][row_to][col_to] = true;
-        piecesOnField[color] += newPiecesToField;
+        /*
+        * Reaching this means the move does not break any rules.
+        * We can make the move and update class variables accordingly.
+        */
+        pieceToBeMoved.setPosition(piecesNewPosition);
+        piecesOnField[move.getColor()] += newPiecesOnField;
+        piecePositions[move.getColor()]
+                [piecesXcoordinateFrom][piecesYcoordinateFrom] = false;
+        piecePositions[move.getColor()]
+                [piecesXcoordinateTo][piecesYcoordinateTo] = true;
+        
         return true;
-        
-        
         
     }
     

@@ -79,8 +79,8 @@ public class Board {
         return this.size;
     }
     
-    public Line[][] getLines() {
-        return lines;
+    public Line getLine(int orientation, int index) {
+        return lines[orientation][index];
     }
     
     /**
@@ -90,20 +90,10 @@ public class Board {
      * @return  Copy of the Board.
      */
     public Board getCopy() {
-        Board board_copy = new Board(size);
-        Line[][] line_copys = board_copy.getLines();
-        //TODO: simplify
-        for (int i=0; i<size; i++) {
-            line_copys[0][i].setPiecePositions(
-                    lines[0][i].getPiece(Const.RED).getPosition(),
-                    lines[0][i].getPiece(Const.BLACK).getPosition());
-        }
-        for (int i=0; i<size; i++) {
-            line_copys[1][i].setPiecePositions(
-                    lines[1][i].getPiece(Const.RED).getPosition(),
-                    lines[1][i].getPiece(Const.BLACK).getPosition());
-        }
-        return board_copy;
+        throw new UnsupportedOperationException("Not supported yet.");
+        //Board board_copy = new Board(size);
+        
+        
     }
             
     @Override
