@@ -5,13 +5,12 @@
  */
 package slidingttt.logic;
 
-import java.util.Arrays;
 
 /**
  *
  * @author Valhe Kouneli
  */
-public class Situation extends Board {
+public class Situation {
     
     private static final boolean RED = true;
     private static final boolean BLACK = false;
@@ -19,15 +18,19 @@ public class Situation extends Board {
     private int blacks_on_field;
     private boolean[][] red_positions;
     private boolean[][] black_positions;
+    private final int size;
+    private final Board board;
     
     public Situation(int size) {
-        super(size);
+        this.size = size;
+        board = new Board(size);
     }
     
     public void setBeginningSituation() {
+        board.setBeginningPosition();
         reds_on_field = 0;
         blacks_on_field = 0;
-        int size = super.getSize();
+        
         red_positions = new boolean[size][size];
         black_positions = new boolean[size][size];
     }
@@ -40,8 +43,9 @@ public class Situation extends Board {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
-    public void setSituation(int reds_on_field, int blacks_on_field,
+    public void setSituation(Line[][] lines, int reds_on_field, int blacks_on_field,
             boolean[][] red_positions, boolean[][] black_positions) {
+        board.setLines(lines);
         this.reds_on_field = reds_on_field;
         this.blacks_on_field = blacks_on_field;
         this.red_positions = red_positions;
@@ -64,12 +68,12 @@ public class Situation extends Board {
         return black_positions[x][y];
     }
     
-    @Override
+    public int getSize() {
+        return size;
+    }
+    
     public Situation getCopy(){
-        int size = super.getSize();
-        Situation copy = new Situation(size);
-        copy.setSituation(reds_on_field, blacks_on_field, Arrays.copyOf(red_positions, size), Arrays.copyOf(black_positions, size));
-        return copy;
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
     
