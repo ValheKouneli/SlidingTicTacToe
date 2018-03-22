@@ -89,6 +89,7 @@ public class Board {
                 .getPiece(color).getPosition();
     }
     
+    //TODO: make it take Move as argument
     protected void movePiece(Color color, Orientation orientation, int lineIndex,
             int newPosition) {
         lines[orientation.ordinal()][lineIndex]

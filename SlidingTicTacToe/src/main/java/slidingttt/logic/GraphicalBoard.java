@@ -21,9 +21,8 @@ import slidingttt.board.Situation;
  */
 class GraphicalBoard extends JPanel {
     
-    private  Shape[] pieces;
+    private ArrayList<Shape> pieces;
 
-    //TODO: change into arrays
     private final Dimension dim = new Dimension(500, 500);
     private Situation situation;
     
@@ -34,7 +33,9 @@ class GraphicalBoard extends JPanel {
     
     public void setSituationAndInit(Situation situation) {
         this.situation = situation;
-        pieces = new Shape[situation.getSize()*Const.NUMBER_OF_ORIENTATIONS*2];
+        pieces = new ArrayList<>();
+        
+        //add shapes
         
         addMouseListener(new MouseAdapter() { //MouseListener is interface so can not be instantiated
             @Override
@@ -50,6 +51,16 @@ class GraphicalBoard extends JPanel {
                 }
             }
         });
+    }
+    
+    public void refresh() {
+        for (Color value : Color.values()) {
+            for (Orientation orientation : Orientation.values()) {
+                for (int i=0; i<situation.getSize(); i++) {
+                    //add pieces
+                }
+            }
+        }
     }
     
     @Override
