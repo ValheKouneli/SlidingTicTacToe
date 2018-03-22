@@ -152,8 +152,11 @@ public class Situation {
 
     public boolean pieceIsTryingToPassAnother(int orig, int dest,
             int otherPiecesPosition) {
-        return (orig < otherPiecesPosition && otherPiecesPosition < dest) ||
-                (dest < otherPiecesPosition && otherPiecesPosition < dest);
+        if (orig<dest) {
+            return (orig < otherPiecesPosition && otherPiecesPosition < dest);
+        } else {
+            return (dest < otherPiecesPosition && otherPiecesPosition < orig);
+        }
     }
     
     @Override
