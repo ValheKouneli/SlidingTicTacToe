@@ -26,10 +26,8 @@ public class Game {
         int index;
         int from;
         int destination;
-        Color turn;
         
-        do {
-            turn = situation.getTurn();
+        while (true) {
             do {
                 System.out.println(situation.toString());
                 System.out.println("Give orientation.");
@@ -42,9 +40,13 @@ public class Game {
                 destination = reader.nextInt();
             } while (!situation.move(new Move(situation.getTurn(), Orientation.values()[orientation], 
                     index, from, destination)));
-        } while (!situation.checkForThreeInARow(turn));
+            if (situation.thereIsThreeInARow(situation.getTurn())) {
+                break;
+            }
+            situation.nextTurn();
+        } 
         
-        System.out.println("Winner: " + turn.name());
+        System.out.println("Winner: " + situation.getTurn().name());
         
         
         reader.close();

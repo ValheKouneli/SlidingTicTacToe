@@ -108,7 +108,7 @@ public class Situation {
         * We can make the move and update class variables accordingly.
         */
         pieceToBeMoved.setPosition(piecesNewPosition);
-        turn = whoIsNext(turn);
+        
         piecesOnField[move.getColor().ordinal()] += newPiecesOnField;
         piecePositions[move.getColor().ordinal()]
                 [piecesXcoordinateFrom][piecesYcoordinateFrom] = false;
@@ -119,7 +119,11 @@ public class Situation {
         
     }
     
-    public boolean checkForThreeInARow(Color color) {
+    public void nextTurn(){
+        turn = whoIsNext(turn);
+    }
+    
+    public boolean thereIsThreeInARow(Color color) {
         //check downward diagonal 3-in-a-rows
         for (int i=1; i<board.getSize()-2; i++) {
             for (int j=1; j<board.getSize()-2; j++) {
