@@ -29,7 +29,7 @@ public class Board {
 
     
     private final int size;
-    private Line[][] lines;
+    protected Line[][] lines;
     private char[][] emptyBoardRepresentation;
 
     /**

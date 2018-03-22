@@ -15,17 +15,17 @@ import slidingttt.logic.Const;
  *
  * @author Valhe Kouneli
  */
-public class Situation {
+public class Situation extends Board {
     
     private int[] piecesOnField; //red pieces on field and black pieces on field
     //TODO: simplify: only one int(!) array, number tells if occupied and
     //by what color
     private boolean[][][] piecePositions;
-    private final Board board;
+
     private Color turn;
     
     public Situation(int size) {
-        board = new Board(size);
+        super(size);
         piecesOnField = new int[Const.NUMBER_OF_COLORS];
         piecePositions = new boolean[Const.NUMBER_OF_COLORS][size+2][size+2];
         
@@ -34,8 +34,8 @@ public class Situation {
     
     public boolean move(Move move) {
         
-        Piece pieceToBeMoved = board.getLine(move.getOrientation(), 
-                                             move.getLineIndex())
+        Piece pieceToBeMoved = lines[move.getColor().ordinal()]
+                                          [move.getLineIndex()]
                 .getPiece(move.getColor());
         
         int piecesPositionNow = pieceToBeMoved.getPosition();
@@ -64,7 +64,7 @@ public class Situation {
         
         int newPiecesOnField = 0; // intrinsically, a move does not bring
                                   // new pieces to field
-        if (piecesPositionNow == 0 || piecesPositionNow == board.getSize()+1) {
+        if (piecesPositionNow == 0 || piecesPositionNow == super.getSize()+1) {
             //no need to check if piece ends up in another base; not possible
             newPiecesOnField = 1;
 
@@ -127,8 +127,8 @@ public class Situation {
     
     public boolean thereIsThreeInARow(Color color) {
         //check downward diagonal 3-in-a-rows
-        for (int i=1; i<=board.getSize()-2; i++) {
-            for (int j=1; j<=board.getSize()-2; j++) {
+        for (int i=1; i<=super.getSize()-2; i++) {
+            for (int j=1; j<=super.getSize()-2; j++) {
                 if (piecePositions[color.ordinal()][i][j] &&
                         piecePositions[color.ordinal()][i+1][j+1] &&
                         piecePositions[color.ordinal()][i+2][j+2]) {
@@ -139,8 +139,8 @@ public class Situation {
             }
         }
         //check for horizontal 3-in-a-row
-        for (int i=1; i<=board.getSize(); i++) {
-            for (int j=1; j<=board.getSize()-2; j++) {
+        for (int i=1; i<=super.getSize(); i++) {
+            for (int j=1; j<=super.getSize()-2; j++) {
                 if (piecePositions[color.ordinal()][i][j] &&
                         piecePositions[color.ordinal()][i][j+1] &&
                         piecePositions[color.ordinal()][i][j+2]) {
@@ -150,8 +150,8 @@ public class Situation {
             }
         }
         //check for vertical diagonal 3-in-a-row
-        for (int i=1; i<=board.getSize()-2; i++) {
-            for (int j=1; j<=board.getSize(); j++) {
+        for (int i=1; i<=super.getSize()-2; i++) {
+            for (int j=1; j<=super.getSize(); j++) {
                  if (piecePositions[color.ordinal()][i][j] &&
                         piecePositions[color.ordinal()][i+1][j] &&
                         piecePositions[color.ordinal()][i+2][j]) {
@@ -161,8 +161,8 @@ public class Situation {
             }
         }
         //check for upward diagonal 3-in-a-rows
-        for (int i=1; i<=board.getSize()-2; i++) {
-            for (int j=board.getSize(); j>2; j--) {
+        for (int i=1; i<=super.getSize()-2; i++) {
+            for (int j=super.getSize(); j>2; j--) {
                 if (piecePositions[color.ordinal()][i][j] &&
                         piecePositions[color.ordinal()][i-1][j-1] &&
                         piecePositions[color.ordinal()][i-2][j-1]) {
@@ -207,11 +207,7 @@ public class Situation {
         return piecePositions[color.ordinal()][x][y];
     }
     
-    
-    public int getSize() {
-        return board.getSize();
-    }
-    
+    @Override
     public Situation getCopy(){
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -231,7 +227,7 @@ public class Situation {
     
     @Override
     public String toString(){
-        return board.toString() + "It's " + turn.name() + "'s turn.\n";
+        return super.toString() + "It's " + turn.name() + "'s turn.\n";
     }
     
     
