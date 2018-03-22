@@ -13,48 +13,34 @@ import java.util.Scanner;
 public class Game {
     
     private Situation situation;
+    private Player[] players;
     
     
     public Game(int size) {
         situation = new Situation(size);
+        players = new Player[]
+                {new HumanPlayer(Color.RED), new HumanPlayer(Color.BLACK)};
 
     }
     
     public void start() {
-        Scanner reader = new Scanner(System.in);
-        int orientation;
-        int index;
-        int from;
-        int destination;
+        Move move;
         
         while (true) {
             do {
-                System.out.println(situation.toString());
-                System.out.println("Give orientation.");
-                orientation = reader.nextInt();
-                System.out.println("Give line index.");
-                index = reader.nextInt();
-                System.out.println("Give position 'from'.");
-                from = reader.nextInt();
-                System.out.println("Give destination.");
-                destination = reader.nextInt();
-            } while (!situation.move(new Move(situation.getTurn(), Orientation.values()[orientation], 
-                    index, from, destination)));
+                move = players[situation.getTurn().ordinal()]
+                        .getNextMove(situation);
+            } while (!situation.move(move));
             if (situation.thereIsThreeInARow(situation.getTurn())) {
                 break;
             }
             situation.nextTurn();
         } 
         
-        System.out.println("Winner: " + situation.getTurn().name());
+        System.out.println("Winner: " + situation.getTurn().toString());
         
+ 
         
-        reader.close();
-        
-    }
-    
-    public boolean move(Piece piece, int destination) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
     
     
