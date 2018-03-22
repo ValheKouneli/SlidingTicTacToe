@@ -13,6 +13,6 @@ public enum Color {
      */
     @Override
     public String toString() {
-        return name();
+        return "Color: " + name();
     }
 }
