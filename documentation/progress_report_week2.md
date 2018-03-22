@@ -21,6 +21,10 @@ WED: Redesigning the class structure, again, but this time not as much as yester
 
 Time spent: 2,5h
 
-WED: More reordering the class structure. Trying to make the game run. Hitting head on a wall. Buggy code is buggy.
+WED: More re-ordering the class structure. Trying to make the game run. Hitting head on a wall. Buggy code is buggy.
+
+Time spent: 4h
+
+THO: Made the game run. Lot of refactoring. Still a lot of time goes to learning the ways of Java.
 
 Time spent: 4h
