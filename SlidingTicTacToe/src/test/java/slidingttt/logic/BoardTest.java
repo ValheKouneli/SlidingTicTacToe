@@ -32,23 +32,18 @@ public class BoardTest {
         assertEquals(3, board.getSize());
     }
    
-    @Test
-    public void constructorMakesTwoLineArraysOfCorrectSize() {
-        assertEquals(board.getSize(), board.getLines()[0].length);
-        assertEquals(board.getSize(), board.getLines()[1].length);
-    }
     
     @Test
     public void constructorMakesLinesOfRightNumber() {
         //random tests
-        assertEquals(2, board.getLines()[0][2].getNumber());
-        assertEquals(0, board.getLines()[1][0].getNumber());
+        assertEquals(2, board.getLine(0,2).getNumber());
+        assertEquals(0, board.getLine(1,0).getNumber());
     }
     
     @Test
     public void constructorMakesLinesOfRightLength() {
         //random test
-        assertEquals(5, board.getLines()[0][2].getLength());
+        assertEquals(5, board.getLine(0,2).getLength());
     }
     
     //@Test
