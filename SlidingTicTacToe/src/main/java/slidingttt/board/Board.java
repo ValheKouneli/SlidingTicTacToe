@@ -83,8 +83,9 @@ public class Board {
         return this.size;
     }
     
-    public Line getLine(Orientation orientation, int index) {
-        return lines[orientation.ordinal()][index];
+    public int getPiecePosition(Color color, Orientation orientation, int lineIndex) {
+        return lines[orientation.ordinal()][lineIndex]
+                .getPiece(color).getPosition();
     }
     
     /**
