@@ -24,15 +24,15 @@ public class LineTest {
     
     @Test
     public void constructorSetsCorrectIndexAndLength() {
-        assertEquals(Const.VERTICAL, line.getOrientation());
+        assertEquals(Orientation.VERTICAL, line.getOrientation());
         assertEquals(0, line.getNumber());
         assertEquals(5, line.getLength());
     }
     
     @Test
     public void constructorSetsCorrectPieceColors() {
-        assertEquals(Const.RED, line.getPiece(Color.RED).getColor());
-        assertEquals(Const.BLACK, line.getPiece(Color.BLACK).getColor());
+        assertEquals(Color.RED, line.getPiece(Color.RED).getColor());
+        assertEquals(Color.BLACK, line.getPiece(Color.BLACK).getColor());
 
     }
     
