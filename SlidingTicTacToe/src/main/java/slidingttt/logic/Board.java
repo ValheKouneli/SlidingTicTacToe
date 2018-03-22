@@ -68,10 +68,10 @@ public class Board {
         
         //TODO: simplify
         for (int i=0; i<size; i++) {
-            this.lines[0][i] = new Line(Const.HORIZONTAL, i, size+2);
+            this.lines[0][i] = new Line(Orientation.HORIZONTAL, i, size+2);
         }
         for (int i=0; i<size; i++) {
-            this.lines[1][i] = new Line(Const.VERTICAL, i, size+2);
+            this.lines[1][i] = new Line(Orientation.VERTICAL, i, size+2);
         }
     }
 
@@ -79,8 +79,8 @@ public class Board {
         return this.size;
     }
     
-    public Line getLine(int orientation, int index) {
-        return lines[orientation][index];
+    public Line getLine(Orientation orientation, int index) {
+        return lines[orientation.ordinal()][index];
     }
     
     /**
@@ -107,9 +107,9 @@ public class Board {
         */
         for (Line line : lines[0]) { 
             x = line.getNumber()+1;
-            y = line.getPiece(Const.RED).getPosition();
+            y = line.getPiece(Color.RED).getPosition();
             emptyBoardRepresentation[x][y] = RED_HORIZONTAL;
-            y = line.getPiece(Const.BLACK).getPosition();
+            y = line.getPiece(Color.BLACK).getPosition();
             emptyBoardRepresentation[x][y] = BLACK_HORIZONTAL;
         }
         /*
@@ -117,9 +117,9 @@ public class Board {
         */
         for (Line line: lines[1]) {
             y = line.getNumber()+1;
-            x = line.getPiece(Const.RED).getPosition();
+            x = line.getPiece(Color.RED).getPosition();
             emptyBoardRepresentation[x][y] = RED_VERTICAL;
-            x = line.getPiece(Const.BLACK).getPosition();
+            x = line.getPiece(Color.BLACK).getPosition();
             emptyBoardRepresentation[x][y] = BLACK_VERTICAL;
         }
         
