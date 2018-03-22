@@ -14,11 +14,11 @@ public class Move {
 
     private final int from;
     private final int to;
-    private final int orientation;
+    private final Orientation orientation;
     private final int lineIndex;
-    private final int color;
+    private final Color color;
     
-    public Move(int color, int orientation, int lineIndex, int from, int to) {
+    public Move(Color color, Orientation orientation, int lineIndex, int from, int to) {
         this.color = color;
         this.orientation = orientation;
         this.from = from;
@@ -26,7 +26,7 @@ public class Move {
         this.lineIndex = lineIndex;
     }
     
-    public int getOrientation() {
+    public Orientation getOrientation() {
         return orientation;
     }
     
@@ -34,7 +34,7 @@ public class Move {
         return lineIndex;
     }
     
-    public int getColor() {
+    public Color getColor() {
         return color;
     }
     
