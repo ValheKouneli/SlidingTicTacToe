@@ -187,6 +187,17 @@ public class Situation {
         }
     }
     
+    public Color whoWasBefore(Color turnNow) {
+        //if there are more than two colors, should consult a static final list
+        //that lists the turn order
+        switch (turnNow) {
+            case RED :    return Color.BLACK;
+            case BLACK :  return Color.RED;
+            default:            throw new InvalidParameterException
+                                                ("Color not in use.");
+        }
+    }
+    
     public int getPiecesOnField(Color color) {
         return piecesOnField[color.ordinal()];
     }

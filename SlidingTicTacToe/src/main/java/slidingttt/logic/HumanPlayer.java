@@ -27,12 +27,14 @@ public class HumanPlayer extends Player {
     
     @Override
     Move getNextMove(Situation situation) {
+        int orientation_nro;
         Orientation orientation;
         int index;
         int from;
         int dest;
         System.out.println(situation.toString());
         System.out.println("Give orientation.");
+        orientation_nro = reader.nextInt();
         orientation = Orientation.values()[reader.nextInt()];
         System.out.println("Give line index.");
         index = reader.nextInt();

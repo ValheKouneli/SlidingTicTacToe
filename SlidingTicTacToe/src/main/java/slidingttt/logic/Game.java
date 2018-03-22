@@ -6,13 +6,12 @@
 package slidingttt.logic;
 import slidingttt.board.Move;
 import slidingttt.board.Situation;
-import java.util.Scanner;
 
 /**
  *
  * @author Valhe Kouneli
  */
-public class Game {
+public abstract class Game {
     
     private Situation situation;
     private Player[] players;
@@ -20,17 +19,18 @@ public class Game {
     
     public Game(int size) {
         situation = new Situation(size);
-        players = new Player[]
-                {new HumanPlayer(Color.RED), new HumanPlayer(Color.BLACK)};
-
+        setPlayers();
     }
     
+    public abstract void setPlayers();
+    
     public void start() {
-        //init();
+        init();
         
         Move move;
         
         while (true) {
+            refreshDisplay();
             do {
                 move = players[situation.getTurn().ordinal()]
                         .getNextMove(situation);
@@ -41,11 +41,15 @@ public class Game {
             situation.nextTurn();
         } 
         
-        System.out.println("Winner: " + situation.getTurn().toString());
-        
- 
-        
+        announceWinner();
     }
+    
+    public Situation getSituation() {
+        return situation;
+    }
+    public abstract void init();
+    public abstract void refreshDisplay();
+    public abstract void announceWinner();
     
     
 }
