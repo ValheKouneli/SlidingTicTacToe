@@ -5,6 +5,8 @@
  */
 package slidingttt.logic;
 
+import slidingttt.board.Move;
+import slidingttt.board.Situation;
 import java.util.Scanner;
 
 /**

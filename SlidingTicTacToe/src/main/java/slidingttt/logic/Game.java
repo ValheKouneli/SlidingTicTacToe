@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package slidingttt.logic;
+import slidingttt.board.Move;
+import slidingttt.board.Situation;
 import java.util.Scanner;
 
 /**
@@ -24,6 +26,8 @@ public class Game {
     }
     
     public void start() {
+        //init();
+        
         Move move;
         
         while (true) {

@@ -5,6 +5,9 @@
  */
 package slidingttt.logic;
 
+import slidingttt.board.Move;
+import slidingttt.board.Situation;
+
 /**
  *
  * @author Valhe Kouneli

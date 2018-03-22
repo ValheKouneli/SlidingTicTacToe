@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package slidingttt.logic;
+package slidingttt.board;
 
 import java.security.InvalidParameterException;
+import slidingttt.logic.Color;
+import slidingttt.logic.Const;
 
 
 /** Class has the functions to take care that the rules of the game

@@ -3,11 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package slidingttt.logic;
+package slidingttt.board;
 
+import slidingttt.board.Piece;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+import slidingttt.logic.Color;
+import slidingttt.logic.Orientation;
 
 /**
  *

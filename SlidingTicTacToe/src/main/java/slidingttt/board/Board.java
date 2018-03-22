@@ -3,9 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package slidingttt.logic;
+package slidingttt.board;
 
+import slidingttt.board.Line;
 import java.util.Arrays;
+import slidingttt.logic.Color;
+import slidingttt.logic.Const;
+import slidingttt.logic.Orientation;
 
 
 public class Board {
