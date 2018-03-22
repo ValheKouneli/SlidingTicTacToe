@@ -16,23 +16,16 @@ import javax.swing.*;
  */
 public class GUI extends Game implements ActionListener {
     
+    Display display;
+    
     public GUI(int size) {
         super(size);
     }
     
     @Override
     public void init() {
-        JFrame frame = new JFrame("Sliding Tic Tac Toe");
-        
-        JPanel  panel = new JPanel();
-        panel.setLayout(new FlowLayout());
-        
-        frame.add(panel);
-        frame.setSize(500, 500);
-        frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-        
+        display = new Display(this, situation);
+        display.init();
     }
 
     @Override
@@ -42,7 +35,7 @@ public class GUI extends Game implements ActionListener {
 
     @Override
     public void refreshDisplay() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        display.refresh();
     }
 
     @Override

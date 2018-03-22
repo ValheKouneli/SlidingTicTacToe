@@ -13,7 +13,7 @@ import slidingttt.board.Situation;
  */
 public abstract class Game {
     
-    private Situation situation;
+    protected Situation situation;
     protected Player[] players;
     
     
