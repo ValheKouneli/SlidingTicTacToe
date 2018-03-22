@@ -8,7 +8,8 @@ package slidingttt.logic;
 import java.security.InvalidParameterException;
 
 
-/**
+/** Class has the functions to take care that the rules of the game
+ *  Sliding Tic Tac Toe are being followed.
  *
  * @author Valhe Kouneli
  */
