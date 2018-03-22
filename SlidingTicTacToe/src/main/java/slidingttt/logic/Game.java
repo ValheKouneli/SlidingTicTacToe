@@ -26,8 +26,10 @@ public class Game {
         int index;
         int from;
         int destination;
+        Color turn;
         
         do {
+            turn = situation.getTurn();
             do {
                 System.out.println(situation.toString());
                 System.out.println("Give orientation.");
@@ -40,12 +42,13 @@ public class Game {
                 destination = reader.nextInt();
             } while (!situation.move(new Move(situation.getTurn(), Orientation.values()[orientation], 
                     index, from, destination)));
-        } while (true);
+        } while (!situation.checkForThreeInARow(turn));
+        
+        System.out.println("Winner: " + turn.name());
         
         
-        //reader.close();
+        reader.close();
         
-        //throw new UnsupportedOperationException("Not supported yet.");
     }
     
     public boolean move(Piece piece, int destination) {

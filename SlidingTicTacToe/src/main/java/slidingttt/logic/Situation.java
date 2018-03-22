@@ -119,8 +119,43 @@ public class Situation {
         
     }
     
-    public boolean checkForThreeInARow() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean checkForThreeInARow(Color color) {
+        //check for horizontal, vertical and downward diagonal 3-in--a-rows
+        for (int i=1; i<board.getSize()-2; i++) {
+            for (int j=1; j<board.getSize()-2; j++) {
+                if (piecePositions[color.ordinal()][i][j]) {
+                    if (piecePositions[color.ordinal()][i][j+1] &&
+                        piecePositions[color.ordinal()][i][j+2]) {
+                        //horiontal 3-in-a-row found
+                        return true;
+                    }
+                    if (piecePositions[color.ordinal()][i+1][j] &&
+                        piecePositions[color.ordinal()][i+2][j]) {
+                        //vertical 3-in-a-row found
+                        return true;
+                    }
+                    if (piecePositions[color.ordinal()][i+1][j+1] &&
+                        piecePositions[color.ordinal()][i+2][j+2]) {
+                        //downward diagonal 3-in-a-row found
+                        return true;
+                    }
+                }
+            }
+        }
+        //check for upward diagonal 3-in-a-rows
+        for (int i=1; i<board.getSize()-2; i++) {
+            for (int j=board.getSize(); j>2; j--) {
+                if (piecePositions[color.ordinal()][i][j] &&
+                        piecePositions[color.ordinal()][i-1][j-1] &&
+                        piecePositions[color.ordinal()][i-2][j-1]) {
+                    //upward diagonal 3-in-a-row found
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+        
     }
     
     public Color whoIsNext(Color turnNow) {
