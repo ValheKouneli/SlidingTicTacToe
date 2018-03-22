@@ -17,9 +17,9 @@ public class Line {
     private final int index;
     private Piece red;
     private Piece black;
-    private final int orientation;
+    private final Orientation orientation;
     
-    public Line(int orientation, int index, int length){
+    public Line(Orientation orientation, int index, int length){
         this.orientation = orientation;
         this.length = length;
         this.index = index;
@@ -36,8 +36,8 @@ public class Line {
             red_position = length-1;
             black_position = 0;
         }
-        red = new Piece(Const.RED, orientation, red_position);
-        black = new Piece(Const.BLACK, orientation, black_position);
+        red = new Piece(Color.RED, orientation, red_position);
+        black = new Piece(Color.BLACK, orientation, black_position);
         red.setOtherPiece(black);
         black.setOtherPiece(red);
 
@@ -48,35 +48,35 @@ public class Line {
         black.setPosition(black_position);
     }
     
-    public void move(int color, int destination) {
+    public void move(Color color, int destination) {
         switch (color) {
-            case Const.RED:     red.setPosition(destination);
+            case RED:     red.setPosition(destination);
                                 break;
-            case Const.BLACK:   black.setPosition(destination);
+            case BLACK:   black.setPosition(destination);
                                 break;
             default:        throw new InvalidParameterException("Color not in use.");
         }
     }
     
-    public int getColorInPosition(int position) {
+    public Color getColorInPosition(int position) {
         if (red.getPosition() == position) {
-            return Const.RED;
+            return Color.RED;
         } else if (black.getPosition() == position) {
-            return Const.BLACK;
+            return Color.BLACK;
         } else {
-            return Const.NO_COLOR;
+            return null;
         }
     }
     
-    public Piece getPiece(int color){
+    public Piece getPiece(Color color){
         switch (color) {
-            case Const.RED:     return red;
-            case Const.BLACK:   return black;
+            case RED:     return red;
+            case BLACK:   return black;
             default:            throw new InvalidParameterException("Color not in use.");
         }
     }
     
-    public int getOrientation() {
+    public Orientation getOrientation() {
         return orientation;
     }
     
