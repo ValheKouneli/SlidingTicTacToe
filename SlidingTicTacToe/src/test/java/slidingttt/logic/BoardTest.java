@@ -36,14 +36,14 @@ public class BoardTest {
     @Test
     public void constructorMakesLinesOfRightNumber() {
         //random tests
-        assertEquals(2, board.getLine(0,2).getNumber());
-        assertEquals(0, board.getLine(1,0).getNumber());
+        assertEquals(2, board.getLine(Orientation.HORIZONTAL,2).getNumber());
+        assertEquals(0, board.getLine(Orientation.VERTICAL,0).getNumber());
     }
     
     @Test
     public void constructorMakesLinesOfRightLength() {
         //random test
-        assertEquals(5, board.getLine(0,2).getLength());
+        assertEquals(5, board.getLine(Orientation.HORIZONTAL,2).getLength());
     }
     
     @Test
@@ -63,7 +63,7 @@ public class BoardTest {
                             + "B+++R\n"
                             + "R+++B\n"
                             + " brb \n";
-        board.getLine(Const.HORIZONTAL, 0).getPiece(Const.RED).setPosition(1);
+        board.getLine(Orientation.HORIZONTAL, 0).getPiece(Color.RED).setPosition(1);
         assertEquals(nextPosition, board.toString());
     }
     

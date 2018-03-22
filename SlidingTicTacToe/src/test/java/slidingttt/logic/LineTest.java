@@ -19,7 +19,7 @@ public class LineTest {
     
     @Before
     public void setUp() {
-        line = new Line(Const.VERTICAL, 0, 5);
+        line = new Line(Orientation.VERTICAL, 0, 5);
     }
     
     @Test
@@ -31,33 +31,33 @@ public class LineTest {
     
     @Test
     public void constructorSetsCorrectPieceColors() {
-        assertEquals(Const.RED, line.getPiece(Const.RED).getColor());
-        assertEquals(Const.BLACK, line.getPiece(Const.BLACK).getColor());
+        assertEquals(Const.RED, line.getPiece(Color.RED).getColor());
+        assertEquals(Const.BLACK, line.getPiece(Color.BLACK).getColor());
 
     }
     
     @Test
     public void constructorSetsCorrectPieceOrientation() {
-        assertEquals(line.getOrientation(), line.getPiece(Const.BLACK).getOrientation());
-        assertEquals(line.getOrientation(), line.getPiece(Const.RED).getOrientation());
+        assertEquals(line.getOrientation(), line.getPiece(Color.BLACK).getOrientation());
+        assertEquals(line.getOrientation(), line.getPiece(Color.RED).getOrientation());
     }
     
     @Test
     public void constructorSetsCorrectPiecePositions() {
-        assertEquals(0, line.getPiece(Const.RED).getPosition());
-        assertEquals(4, line.getPiece(Const.BLACK).getPosition());
+        assertEquals(0, line.getPiece(Color.RED).getPosition());
+        assertEquals(4, line.getPiece(Color.BLACK).getPosition());
     }
     
     @Test
     public void constructorLetsPiecesKnowEachOther() {
-        assertEquals(0, line.getPiece(Const.BLACK).getOtherPiece().getPosition());
-        assertEquals(4, line.getPiece(Const.RED).getOtherPiece().getPosition());
+        assertEquals(0, line.getPiece(Color.BLACK).getOtherPiece().getPosition());
+        assertEquals(4, line.getPiece(Color.RED).getOtherPiece().getPosition());
     }
     
     @Test
     public void getCopyWorks() {
         Line copy = line.getCopy();
-        copy.getPiece(Const.RED).setPosition(3);
-        assertEquals(0, line.getPiece(Const.RED).getPosition());
+        copy.getPiece(Color.RED).setPosition(3);
+        assertEquals(0, line.getPiece(Color.RED).getPosition());
     }
 }
