@@ -150,8 +150,6 @@ public class Situation {
         return turn;
     }
 
-    //Problem: how can one get the position of the other piece
-    //on the same line now?
     private boolean pieceIsTryingToPassAnother(int orig, int dest,
             int otherPiecesPosition) {
         return (orig < otherPiecesPosition && otherPiecesPosition < dest) ||
