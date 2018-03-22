@@ -29,6 +29,10 @@ THO: Made the game run. Lot of refactoring. Still a lot of time goes to learning
 
 Time spent: 4h
 
-THO: Separated game interface from game logic. Started learning Java 2D graphics and building a GUI."
+THO: Separated game interface from game logic. Started learning Java 2D graphics and building a GUI.
 
 Time spent: 4h
+
+THO: Figuring out how to implement the GUI. Minor changes to things to make GUI easier to implement.
+
+Time spent: 1,5h
