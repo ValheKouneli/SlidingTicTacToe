@@ -21,22 +21,26 @@ import slidingttt.board.Situation;
  */
 class GraphicalBoard extends JPanel {
     
-    private  ArrayList<Shape> redPieces;
-    private  ArrayList<Shape> blackPieces;
-    private  ArrayList<Shape> places;
-    private  ArrayList<Shape> grid;
+    private  Shape[] pieces;
+
     //TODO: change into arrays
     private final Dimension dim = new Dimension(500, 500);
     private Situation situation;
     
     public GraphicalBoard() {
-        redPieces = new ArrayList<>();
-        //add redPieces
+        super();
+    }
+    
+    
+    public void setSituationAndInit(Situation situation) {
+        this.situation = situation;
+        pieces = new Shape[situation.getSize()*Const.NUMBER_OF_ORIENTATIONS*2];
+        
         addMouseListener(new MouseAdapter() { //MouseListener is interface so can not be instantiated
             @Override
             public void mouseClicked(MouseEvent me) {
                 super.mouseClicked(me);
-                for (Shape s : redPieces) {
+                for (Shape s : pieces) {
 
                     if (s.contains(me.getPoint())) {//check if mouse is clicked within shape
 
@@ -48,15 +52,11 @@ class GraphicalBoard extends JPanel {
         });
     }
     
-    public void setSituation(Situation situation) {
-        this.situation = situation;
-    }
-    
     @Override
     protected void paintComponent(Graphics grphcs) {
         super.paintComponent(grphcs);
         Graphics2D g2d = (Graphics2D) grphcs;
-        for (Shape s : redPieces) {
+        for (Shape s : pieces) {
             g2d.draw(s);
         }
     }

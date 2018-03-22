@@ -38,7 +38,7 @@ public class Display {
     
     private void initComponents(JFrame frame) {
         GraphicalBoard graphicalBoard = new GraphicalBoard();
-        graphicalBoard.setSituation(situation);
+        graphicalBoard.setSituationAndInit(situation);
         frame.add(graphicalBoard);
     }
     
