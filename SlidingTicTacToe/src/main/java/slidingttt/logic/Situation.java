@@ -19,14 +19,14 @@ public class Situation {
     //by what color
     private boolean[][][] piecePositions;
     private final Board board;
-    private int turn;
+    private Color turn;
     
     public Situation(int size) {
         board = new Board(size);
         piecesOnField = new int[Const.NUMBER_OF_COLORS];
         piecePositions = new boolean[Const.NUMBER_OF_COLORS][size+2][size+2];
         
-        turn = Const.RED;
+        turn = Color.RED;
     }
     
     public boolean move(Move move) {
@@ -46,12 +46,12 @@ public class Situation {
         int piecesYcoordinateTo;
         
         switch (move.getOrientation()) {
-            case Const.HORIZONTAL :     piecesXcoordinateFrom = move.getLineIndex()+1;
+            case HORIZONTAL :     piecesXcoordinateFrom = move.getLineIndex()+1;
                                         piecesYcoordinateFrom = piecesPositionNow;
                                         piecesXcoordinateTo = move.getLineIndex()+1;
                                         piecesYcoordinateTo = piecesNewPosition;
                                         break;
-            case Const.VERTICAL :       piecesXcoordinateFrom = piecesPositionNow;
+            case VERTICAL :       piecesXcoordinateFrom = piecesPositionNow;
                                         piecesYcoordinateFrom = move.getLineIndex()+1;
                                         piecesXcoordinateTo = piecesNewPosition;
                                         piecesYcoordinateTo = move.getLineIndex()+1;
@@ -86,16 +86,18 @@ public class Situation {
         /*
         * move is illegal if if brings more than MAX_NUMBER_ON_FIELD pieces
         */
-        if (newPiecesOnField > 0 && piecesOnField[move.getColor()] == Const.MAX_NUMBER_ON_FIELD) {
+        if (newPiecesOnField > 0 &&
+                piecesOnField[move.getColor().ordinal()] == 
+                Const.MAX_NUMBER_ON_FIELD) {
             return false;
         }
         
         /*
         * move is illegal if the destination spot is occupied
         */
-        if (piecePositions[Const.RED][piecesXcoordinateTo]
+        if (piecePositions[Color.RED.ordinal()][piecesXcoordinateTo]
                                      [piecesYcoordinateTo] ||
-                piecePositions[Const.BLACK][piecesXcoordinateTo]
+                piecePositions[Color.BLACK.ordinal()][piecesXcoordinateTo]
                                            [piecesYcoordinateTo]) {
             return false;
         }
@@ -106,10 +108,10 @@ public class Situation {
         */
         pieceToBeMoved.setPosition(piecesNewPosition);
         turn = whoIsNext(turn);
-        piecesOnField[move.getColor()] += newPiecesOnField;
-        piecePositions[move.getColor()]
+        piecesOnField[move.getColor().ordinal()] += newPiecesOnField;
+        piecePositions[move.getColor().ordinal()]
                 [piecesXcoordinateFrom][piecesYcoordinateFrom] = false;
-        piecePositions[move.getColor()]
+        piecePositions[move.getColor().ordinal()]
                 [piecesXcoordinateTo][piecesYcoordinateTo] = true;
         
         return true;
@@ -120,21 +122,24 @@ public class Situation {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
-    public int whoIsNext(int turnNow) {
+    public Color whoIsNext(Color turnNow) {
+        //if there are more than two colors, should consult a static final list
+        //that lists the turn order
         switch (turnNow) {
-            case Const.RED :    return Const.BLACK;
-            case Const.BLACK :  return Const.RED;
-            default:            throw new InvalidParameterException("Color not in use.");
+            case RED :    return Color.BLACK;
+            case BLACK :  return Color.RED;
+            default:            throw new InvalidParameterException
+                                                ("Color not in use.");
         }
     }
     
-    public int getPiecesOnField(int color) {
-        return piecesOnField[color];
+    public int getPiecesOnField(Color color) {
+        return piecesOnField[color.ordinal()];
     }
     
     
-    public boolean getPiecePositions(int color, int x, int y) {
-        return piecePositions[color][x][y];
+    public boolean getPiecePositions(Color color, int x, int y) {
+        return piecePositions[color.ordinal()][x][y];
     }
     
     
@@ -146,7 +151,7 @@ public class Situation {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
-    public int getTurn() {
+    public Color getTurn() {
         return turn;
     }
 
