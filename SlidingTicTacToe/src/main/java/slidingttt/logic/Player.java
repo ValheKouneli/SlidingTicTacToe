@@ -11,11 +11,25 @@ package slidingttt.logic;
  */
 public abstract class Player {
     
-    Color color;
+    private Color color;
     
     public Player(Color color) {
         this.color = color;
     }
     
     abstract Move getNextMove(Situation situation);
+
+    /**
+     * @return the color
+     */
+    public Color getColor() {
+        return color;
+    }
+
+    /**
+     * @param color the color to set
+     */
+    public void setColor(Color color) {
+        this.color = color;
+    }
 }
