@@ -38,7 +38,7 @@ public class Game {
                 from = reader.nextInt();
                 System.out.println("Give destination.");
                 destination = reader.nextInt();
-            } while (!situation.move(new Move(situation.getTurn(), orientation, 
+            } while (!situation.move(new Move(situation.getTurn(), Orientation.values()[orientation], 
                     index, from, destination)));
         } while (true);
         
