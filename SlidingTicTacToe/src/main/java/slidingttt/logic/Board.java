@@ -98,7 +98,7 @@ public class Board {
             
     @Override
     public String toString() {
-        char[][] boardAsChars = Arrays.copyOf(emptyBoardRepresentation, size+2);
+        setEmptyBoardRepresentation();
         int x;
         int y;
         //TODO: simplify
@@ -108,9 +108,9 @@ public class Board {
         for (Line line : lines[0]) { 
             x = line.getNumber()+1;
             y = line.getPiece(Const.RED).getPosition();
-            boardAsChars[x][y] = RED_HORIZONTAL;
+            emptyBoardRepresentation[x][y] = RED_HORIZONTAL;
             y = line.getPiece(Const.BLACK).getPosition();
-            boardAsChars[x][y] = BLACK_HORIZONTAL;
+            emptyBoardRepresentation[x][y] = BLACK_HORIZONTAL;
         }
         /*
         * Vertical lines
@@ -118,18 +118,18 @@ public class Board {
         for (Line line: lines[1]) {
             y = line.getNumber()+1;
             x = line.getPiece(Const.RED).getPosition();
-            boardAsChars[x][y] = RED_VERTICAL;
+            emptyBoardRepresentation[x][y] = RED_VERTICAL;
             x = line.getPiece(Const.BLACK).getPosition();
-            boardAsChars[x][y] = BLACK_VERTICAL;
+            emptyBoardRepresentation[x][y] = BLACK_VERTICAL;
         }
         
         /*
-        * Create a string based on the char array boardAsChars.
+        * Create a string based on the char array emptyBoardRepresentation.
         */
         String temp = "";
         for (int i=0; i<size+2; i++) {
             for (int j=0; j<size+2; j++) {
-                temp += boardAsChars[i][j];
+                temp += emptyBoardRepresentation[i][j];
             }
             temp += '\n';
         }

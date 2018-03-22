@@ -46,6 +46,27 @@ public class BoardTest {
         assertEquals(5, board.getLine(0,2).getLength());
     }
     
+    @Test
+    public void toStringWorks() {
+        String beginningPosition = " rbr \n"
+                                 + "R+++B\n"
+                                 + "B+++R\n"
+                                 + "R+++B\n"
+                                 + " brb \n";
+        assertEquals(beginningPosition, board.toString());
+    }
+    
+    @Test
+    public void toStringWorksAfterOneMove() {
+        String nextPosition = " rbr \n"
+                            + "–R++B\n"
+                            + "B+++R\n"
+                            + "R+++B\n"
+                            + " brb \n";
+        board.getLine(Const.HORIZONTAL, 0).getPiece(Const.RED).setPosition(1);
+        assertEquals(nextPosition, board.toString());
+    }
+    
     //@Test
     public void getCopyWorks() {
         //TODO

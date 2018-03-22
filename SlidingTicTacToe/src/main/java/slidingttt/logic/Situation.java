@@ -14,8 +14,6 @@ import java.security.InvalidParameterException;
  */
 public class Situation {
     
-    private static final int RED = 1;
-    private static final int BLACK = 2;
     private int[] piecesOnField; //red pieces on field and black pieces on field
     //TODO: simplify: only one int(!) array, number tells if occupied and
     //by what color
@@ -28,7 +26,7 @@ public class Situation {
         piecesOnField = new int[Const.NUMBER_OF_COLORS];
         piecePositions = new boolean[Const.NUMBER_OF_COLORS][size+2][size+2];
         
-        turn = RED;
+        turn = Const.RED;
     }
     
     public boolean move(Move move) {
@@ -107,6 +105,7 @@ public class Situation {
         * We can make the move and update class variables accordingly.
         */
         pieceToBeMoved.setPosition(piecesNewPosition);
+        turn = whoIsNext(turn);
         piecesOnField[move.getColor()] += newPiecesOnField;
         piecePositions[move.getColor()]
                 [piecesXcoordinateFrom][piecesYcoordinateFrom] = false;
@@ -119,6 +118,14 @@ public class Situation {
     
     public boolean checkForThreeInARow() {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    public int whoIsNext(int turnNow) {
+        switch (turnNow) {
+            case Const.RED :    return Const.BLACK;
+            case Const.BLACK :  return Const.RED;
+            default:            throw new InvalidParameterException("Color not in use.");
+        }
     }
     
     public int getPiecesOnField(int color) {
