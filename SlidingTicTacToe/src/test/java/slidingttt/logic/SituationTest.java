@@ -42,6 +42,14 @@ public class SituationTest {
         assertEquals(false, situation.getPiecePositions(Const.BLACK, SIZE-1, SIZE-1));
     }
     
+    @Test
+    public void pieceIsTryingToPassAnotherWorksProperly() {
+        assertEquals(false, situation.pieceIsTryingToPassAnother(1, 2, 3));
+        assertEquals(true, situation.pieceIsTryingToPassAnother(1, 3, 2));
+        assertEquals(false, situation.pieceIsTryingToPassAnother(3, 2, 1));
+        assertEquals(true, situation.pieceIsTryingToPassAnother(3, 1, 2));
+    }
+    
     //@Test
     public void getCopyWorks() {
         Situation copy = situation.getCopy();

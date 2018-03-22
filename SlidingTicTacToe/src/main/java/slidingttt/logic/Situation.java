@@ -150,7 +150,7 @@ public class Situation {
         return turn;
     }
 
-    private boolean pieceIsTryingToPassAnother(int orig, int dest,
+    public boolean pieceIsTryingToPassAnother(int orig, int dest,
             int otherPiecesPosition) {
         return (orig < otherPiecesPosition && otherPiecesPosition < dest) ||
                 (dest < otherPiecesPosition && otherPiecesPosition < dest);
