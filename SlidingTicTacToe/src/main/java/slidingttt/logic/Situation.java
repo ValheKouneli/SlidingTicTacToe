@@ -166,7 +166,7 @@ public class Situation {
     
     @Override
     public String toString(){
-        return board.toString();
+        return board.toString() + "It's " + turn.name() + "'s turn.\n";
     }
     
     
