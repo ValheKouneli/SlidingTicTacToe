@@ -5,12 +5,16 @@
  */
 package slidingttt.logic;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Valhe Kouneli
  */
 public class CLI extends Game {
 
+    Scanner reader;
+    
     public CLI(int i) {
         super(i);
         
@@ -18,6 +22,7 @@ public class CLI extends Game {
 
     @Override
     public void init() {
+        reader = new Scanner(System.in);
     }
 
     @Override
@@ -33,9 +38,12 @@ public class CLI extends Game {
 
     @Override
     public void setPlayers() {
-        super.players = new Player[]{new HumanPlayer(Color.RED), 
-            new HumanPlayer(Color.BLACK)};
+        HumanPlayer red = new HumanPlayer(Color.RED);
+        HumanPlayer black = new HumanPlayer(Color.BLACK);
+        red.setScanner(reader);
+        black.setScanner(reader);
+        super.players = new Player[]{red, black};
     }
-    }
+    
     
 }

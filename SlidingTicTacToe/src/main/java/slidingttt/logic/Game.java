@@ -14,18 +14,18 @@ import slidingttt.board.Situation;
 public abstract class Game {
     
     private Situation situation;
-    private Player[] players;
+    protected Player[] players;
     
     
     public Game(int size) {
         situation = new Situation(size);
+        init();
         setPlayers();
     }
     
     public abstract void setPlayers();
     
     public void start() {
-        init();
         
         Move move;
         
