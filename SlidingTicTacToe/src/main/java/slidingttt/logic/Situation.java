@@ -125,8 +125,8 @@ public class Situation {
     
     public boolean thereIsThreeInARow(Color color) {
         //check downward diagonal 3-in-a-rows
-        for (int i=1; i<board.getSize()-2; i++) {
-            for (int j=1; j<board.getSize()-2; j++) {
+        for (int i=1; i<=board.getSize()-2; i++) {
+            for (int j=1; j<=board.getSize()-2; j++) {
                 if (piecePositions[color.ordinal()][i][j] &&
                         piecePositions[color.ordinal()][i+1][j+1] &&
                         piecePositions[color.ordinal()][i+2][j+2]) {
@@ -137,8 +137,8 @@ public class Situation {
             }
         }
         //check for horizontal 3-in-a-row
-        for (int i=1; i<board.getSize(); i++) {
-            for (int j=1; j<board.getSize()-2; j++) {
+        for (int i=1; i<=board.getSize(); i++) {
+            for (int j=1; j<=board.getSize()-2; j++) {
                 if (piecePositions[color.ordinal()][i][j] &&
                         piecePositions[color.ordinal()][i][j+1] &&
                         piecePositions[color.ordinal()][i][j+2]) {
@@ -148,8 +148,8 @@ public class Situation {
             }
         }
         //check for vertical diagonal 3-in-a-row
-        for (int i=1; i<board.getSize()-2; i++) {
-            for (int j=1; j<board.getSize(); j++) {
+        for (int i=1; i<=board.getSize()-2; i++) {
+            for (int j=1; j<=board.getSize(); j++) {
                  if (piecePositions[color.ordinal()][i][j] &&
                         piecePositions[color.ordinal()][i+1][j] &&
                         piecePositions[color.ordinal()][i+2][j]) {
@@ -159,7 +159,7 @@ public class Situation {
             }
         }
         //check for upward diagonal 3-in-a-rows
-        for (int i=1; i<board.getSize()-2; i++) {
+        for (int i=1; i<=board.getSize()-2; i++) {
             for (int j=board.getSize(); j>2; j--) {
                 if (piecePositions[color.ordinal()][i][j] &&
                         piecePositions[color.ordinal()][i-1][j-1] &&
