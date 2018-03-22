@@ -28,3 +28,7 @@ Time spent: 4h
 THO: Made the game run. Lot of refactoring. Still a lot of time goes to learning the ways of Java.
 
 Time spent: 4h
+
+THO: Separated game interface from game logic. Started learning Java 2D graphics and building a GUI."
+
+Time spent: 4h
