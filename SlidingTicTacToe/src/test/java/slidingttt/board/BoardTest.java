@@ -37,19 +37,6 @@ public class BoardTest {
    
     
     @Test
-    public void constructorMakesLinesOfRightNumber() {
-        //random tests
-        assertEquals(2, board.getLine(Orientation.HORIZONTAL,2).getNumber());
-        assertEquals(0, board.getLine(Orientation.VERTICAL,0).getNumber());
-    }
-    
-    @Test
-    public void constructorMakesLinesOfRightLength() {
-        //random test
-        assertEquals(5, board.getLine(Orientation.HORIZONTAL,2).getLength());
-    }
-    
-    @Test
     public void toStringWorks() {
         String beginningPosition = " rbr \n"
                                  + "R+++B\n"
@@ -66,7 +53,7 @@ public class BoardTest {
                             + "B+++R\n"
                             + "R+++B\n"
                             + " brb \n";
-        board.getLine(Orientation.HORIZONTAL, 0).getPiece(Color.RED).setPosition(1);
+        board.movePiece(Color.RED, Orientation.HORIZONTAL, 0, 1);
         assertEquals(nextPosition, board.toString());
     }
     
