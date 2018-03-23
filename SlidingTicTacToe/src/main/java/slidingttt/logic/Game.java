@@ -75,9 +75,9 @@ public class Game {
     private boolean pieceStaysOnItsLine(int[] move) {
         char piece = board.getBoardXY(move[0], move[1]);
         if (board.getOrientation(piece) == Orientation.HORIZONTAL) {
-            return move[1] == move[3];
-        } else {
             return move[0] == move[2];
+        } else {
+            return move[1] == move[3];
         }
     }
     
@@ -110,22 +110,22 @@ public class Game {
         boolean oppositePieceFoundInBetween = false;
         
         if (orientation == Orientation.HORIZONTAL) {
-            constantCoordinate = move[1];
-            from = min(move[0], move[2]);
-            to = max(move[0], move[2]);
+            constantCoordinate = move[0];
+            from = min(move[1], move[3]);
+            to = max(move[1], move[3]);
             for (int i=from+1; i<to; i++) {
-                if (board.getBoardXY(i, constantCoordinate) == oppositePiece) {
+                if (board.getBoardXY(constantCoordinate, i) == oppositePiece) {
                     oppositePieceFoundInBetween = true;
                     break;
                 }
             }
             
         } else {
-            constantCoordinate = move[0];
-            from = min(move[1], move[3]);
-            to = max(move[1], move[3]);
+            constantCoordinate = move[1];
+            from = min(move[0], move[2]);
+            to = max(move[0], move[2]);
             for (int i=from+1; i<to; i++) {
-                if (board.getBoardXY(constantCoordinate, i) == oppositePiece) {
+                if (board.getBoardXY(i, constantCoordinate) == oppositePiece) {
                     oppositePieceFoundInBetween = true;
                     break;
                 }
