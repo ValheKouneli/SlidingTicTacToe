@@ -112,25 +112,25 @@ public class Board {
         setEmptyBoardRepresentation();
         int x;
         int y;
-        //TODO: simplify
+        //TODO: DOES NOT GENERALIZE TO HIGHER DIMENSIONS
         /*
         * Horizontal lines
         */
         for (Line line : lines[0]) { 
-            x = line.getCoordinate()+1;
-            y = line.getPiece(PieceColor.RED).getPosition();
+            x = line.getCoordinate(Orientation.VERTICAL)+1;
+            y = line.getPiecePosition(PieceColor.RED);
             emptyBoardRepresentation[x][y] = RED_HORIZONTAL;
-            y = line.getPiece(PieceColor.BLACK).getPosition();
+            y = line.getPiecePosition(PieceColor.BLACK);
             emptyBoardRepresentation[x][y] = BLACK_HORIZONTAL;
         }
         /*
         * Vertical lines
         */
         for (Line line: lines[1]) {
-            y = line.getCoordinate()+1;
-            x = line.getPiece(PieceColor.RED).getPosition();
+            y = line.getCoordinate(Orientation.HORIZONTAL)+1;
+            x = line.getPiecePosition(PieceColor.RED);
             emptyBoardRepresentation[x][y] = RED_VERTICAL;
-            x = line.getPiece(PieceColor.BLACK).getPosition();
+            x = line.getPiecePosition(PieceColor.BLACK);
             emptyBoardRepresentation[x][y] = BLACK_VERTICAL;
         }
         
