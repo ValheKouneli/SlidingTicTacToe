@@ -8,6 +8,7 @@ package slidingttt.board;
 import java.security.InvalidParameterException;
 import slidingttt.logic.PieceColor;
 import slidingttt.logic.Const;
+import slidingttt.logic.Orientation;
 
 
 /** Class has the functions to take care that the rules of the game
@@ -34,15 +35,10 @@ public class Situation extends Board {
     
     public boolean move(Move move) {
         
-        Piece pieceToBeMoved = lines[move.getColor().ordinal()]
-                                          [move.getLineIndex()]
-                .getPiece(move.getColor());
-        
-        int piecesPositionNow = pieceToBeMoved.getPosition();
+
+        int piecesPositionNow = move.getFrom();
         int piecesNewPosition = move.getTo();
-        
-        int otherPiecesPosition = pieceToBeMoved.getOtherPiece().getPosition();
-        
+
         int piecesXcoordinateFrom;
         int piecesYcoordinateFrom;
         int piecesXcoordinateTo;
@@ -69,22 +65,7 @@ public class Situation extends Board {
             newPiecesOnField = 1;
 
         }
-        
-//        /* 
-//        * check to make sure the move makes sense
-//        */
-//        if (piecesPositionNow != move.getFrom()) {
-//            throw new InvalidParameterException("Move.form does not match "
-//                    + "moving piece's current position.");
-//        }
-        
-        /*
-        * move is illegal if moved piece passes other piece on the same line
-        */
-        if (pieceIsTryingToPassAnother(piecesPositionNow, piecesNewPosition, 
-                otherPiecesPosition)) {
-            return false;
-        }
+
  
         /*
         * move is illegal if if brings more than MAX_NUMBER_ON_FIELD pieces
@@ -107,17 +88,23 @@ public class Situation extends Board {
         
         /*
         * Reaching this means the move does not break any rules.
-        * We can make the move and update class variables accordingly.
+        * We can try to make the move and update class variables accordingly.
         */
-        pieceToBeMoved.setPosition(piecesNewPosition);
-        
-        piecesOnField[move.getColor().ordinal()] += newPiecesOnField;
-        piecePositions[move.getColor().ordinal()]
+        if (super.movePiece(move.getColor(), move.getOrientation(),
+                move.getLineIndex(), move.getTo())) {
+            
+            piecesOnField[move.getColor().ordinal()] += newPiecesOnField;
+            piecePositions[move.getColor().ordinal()]
                 [piecesXcoordinateFrom][piecesYcoordinateFrom] = false;
-        piecePositions[move.getColor().ordinal()]
+            piecePositions[move.getColor().ordinal()]
                 [piecesXcoordinateTo][piecesYcoordinateTo] = true;
         
-        return true;
+            return true;
+        } else {
+            return false;
+        }
+        
+        
         
     }
     
