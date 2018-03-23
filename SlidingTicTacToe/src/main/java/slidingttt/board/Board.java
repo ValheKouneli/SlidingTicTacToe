@@ -5,8 +5,6 @@
  */
 package slidingttt.board;
 
-import slidingttt.board.Line;
-import java.util.Arrays;
 import slidingttt.logic.PieceColor;
 import slidingttt.logic.Const;
 import slidingttt.logic.Orientation;
@@ -70,12 +68,12 @@ public class Board {
     private void initializeLines() {
         this.lines = new Line[Const.NUMBER_OF_ORIENTATIONS][size];
         
-        //TODO: simplify
+        //DOES NOT GENERILIZE TO HIGHER DIMENSION ATM
         for (int i=0; i<size; i++) {
-            this.lines[0][i] = new Line(Orientation.HORIZONTAL, i, size+2);
+            this.lines[0][i] = new Line(Orientation.HORIZONTAL, new int[]{0, i}, size+2);
         }
         for (int i=0; i<size; i++) {
-            this.lines[1][i] = new Line(Orientation.VERTICAL, i, size+2);
+            this.lines[1][i] = new Line(Orientation.VERTICAL, new int[]{i, 0}, size+2);
         }
     }
 
@@ -86,14 +84,14 @@ public class Board {
     public int getPiecePosition(PieceColor color, Orientation orientation,
             int lineIndex) {
         return lines[orientation.ordinal()][lineIndex]
-                .getPiece(color).getPosition();
+                .getPiecePosition(color);
     }
     
     //TODO: make it take Move as argument
-    protected void movePiece(PieceColor color, Orientation orientation, int lineIndex,
+    protected boolean movePiece(PieceColor color, Orientation orientation, int lineIndex,
             int newPosition) {
-        lines[orientation.ordinal()][lineIndex]
-                .getPiece(color).setPosition(newPosition);
+        return lines[orientation.ordinal()][lineIndex]
+                .move(color, newPosition);
     }
     
     /**

@@ -76,6 +76,10 @@ public class Line {
         }
     }
     
+    public int getPiecePosition(PieceColor color) {
+        return getPiece(color).getPosition(orientation);
+    }
+    
     public Orientation getOrientation() {
         return orientation;
     }
