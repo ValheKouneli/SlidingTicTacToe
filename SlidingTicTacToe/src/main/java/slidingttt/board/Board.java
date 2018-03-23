@@ -17,6 +17,7 @@ import slidingttt.logic.PieceColor;
 public class Board {
     
     private char[][] board;
+    private final char[][] emptyBoard;
     int size;
 
     /**
@@ -24,28 +25,38 @@ public class Board {
      * If size is an even number, size will be set to size plus one.
      * @param size  The number of horizontal/vertical lines on the STTT board.
      */
-    public Board(int size) {        
+    public Board(int size) {   
+        this.size = size;
         board = new char[size+2][size+2];
-//        for (int i=0; i<size+2; i++) {
-//            for (int j=0; j<size+2; j++) {
-//                char temp;
-//
-//                if ((i==0 || i==size+1) && (j==0 || j==size+1)) {
-//                    temp = 0;
-//                } else if ((i==0 && j%2==1) || (i==size+1 && j%2==0)) {
-//                    temp = Const.RED_VERTICAL;
-//                } else if ((i==0 && j%2==0) || (i==size+1 && j%2==1)) {
-//                    temp = Const.BLACK_VERTICAL;
-//                } else if ((j==0 && i%2==1) || (j==size+1 && i%2==0)) {
-//                    temp = Const.RED_HORIZONTAL;
-//                } else if ((j==0 && i%2==0) || (j==size+1 && i%2==1)) {
-//                    temp = Const.BLACK_HORIZONTAL;
-//                } else {
-//                    temp = 0;
-//                }
-//                this.board[i][j] = temp;
-//            }
-//        }
+        emptyBoard = new char[size+2][size+2];
+        for (int i=0; i<size+2; i++) {
+            for (int j=0; j<size+2; j++) {
+                char temp;
+                char temp2;
+
+                if ((i==0 || i==size+1) && (j==0 || j==size+1)) {
+                    temp = 0;
+                    temp2 = Const.CORNER;
+                } else if ((i==0 && j%2==1) || (i==size+1 && j%2==0)) {
+                    temp = Const.RED_VERTICAL;
+                    temp2 = Const.BASE_VERTICAL;
+                } else if ((i==0 && j%2==0) || (i==size+1 && j%2==1)) {
+                    temp = Const.BLACK_VERTICAL;
+                    temp2 = Const.BASE_VERTICAL;
+                } else if ((j==0 && i%2==1) || (j==size+1 && i%2==0)) {
+                    temp = Const.RED_HORIZONTAL;
+                    temp2 = Const.BASE_HORIZONTAL;
+                } else if ((j==0 && i%2==0) || (j==size+1 && i%2==1)) {
+                    temp = Const.BLACK_HORIZONTAL;
+                    temp2 = Const.BASE_HORIZONTAL;
+                } else {
+                    temp = 0;
+                    temp2 = Const.EMPTY;
+                }
+                this.board[i][j] = temp;
+                this.emptyBoard[i][j] = temp2;
+            }
+        }
     }
     
     public int getSize() {
@@ -57,8 +68,8 @@ public class Board {
     }
     
     public void move(int x_from, int y_from, int x_to, int y_to) {
-        char temp = board[x_from][y_from];
-        setBoardXY(x_to, y_to, temp);
+        board[x_to][y_to] = board[x_from][y_from];
+        board[x_from][y_from] = 0;
     }
            
     public char getBoardXY(int x, int y) {
@@ -111,7 +122,7 @@ public class Board {
             for (int j=0; j<size+2; j++) {
                 c = board[i][j];
                 if (c==0) {
-                    c = ' ';
+                    c = emptyBoard[i][j];
                 }
                 temp += c;
             }

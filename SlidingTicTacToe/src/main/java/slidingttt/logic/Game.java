@@ -166,6 +166,10 @@ public class Game {
         return giveTheOtherColor(turn);
     }
     
+    public int getSize() {
+        return board.getSize();
+    }
+    
     @Override
     public String toString() {
         String temp = board.toString();
