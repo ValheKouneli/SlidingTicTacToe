@@ -42,8 +42,26 @@ public class Piece {
     public Piece getOtherPiece() {
         return otherPiece;
     }
-    public void setPosition(int position) {
-        coordinates[orientation.ordinal()] = position;
+    public boolean setPosition(int position) {
+        /*
+        * move is "physically impossible" if moved piece passes other piece on the same line
+        */
+        if (pieceIsTryingToPassAnother(coordinates[orientation.ordinal()], position, 
+                otherPiece.getPosition(orientation))) {
+            return false;
+        } else {
+            coordinates[orientation.ordinal()] = position;
+            return true;
+        }
+    }
+    
+    private boolean pieceIsTryingToPassAnother(int orig, int dest,
+            int otherPiecesPosition) {
+        if (orig<dest) {
+            return (orig < otherPiecesPosition && otherPiecesPosition < dest);
+        } else {
+            return (dest < otherPiecesPosition && otherPiecesPosition < orig);
+        }
     }
     
     public Piece getCopy(){
