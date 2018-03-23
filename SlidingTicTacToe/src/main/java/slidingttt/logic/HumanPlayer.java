@@ -5,8 +5,6 @@
  */
 package slidingttt.logic;
 
-import slidingttt.board.Move;
-import slidingttt.board.Situation;
 import java.util.Scanner;
 
 /**
@@ -26,25 +24,22 @@ public class HumanPlayer extends Player {
     }
     
     @Override
-    Move getNextMove(Situation situation) {
-        int orientation_nro;
-        Orientation orientation;
-        int index;
-        int from;
-        int dest;
-        System.out.println(situation.toString());
-        System.out.println("Give orientation.");
-        orientation_nro = reader.nextInt();
-        orientation = Orientation.values()[reader.nextInt()];
-        System.out.println("Give line index.");
-        index = reader.nextInt();
-        System.out.println("Give position 'from'.");
-        from = reader.nextInt();
-        System.out.println("Give destination.");
-        dest = reader.nextInt();
+    public int[] getNextMove(Game game) {
+        int x_from;
+        int y_from;
+        int x_to;
+        int y_to;
+        System.out.println(game.toString());
+        System.out.println("Give x_from.");
+        x_from = reader.nextInt();
+        System.out.println("Give y_from index.");
+        y_from = reader.nextInt();
+        System.out.println("Give x_to.");
+        x_to = reader.nextInt();
+        System.out.println("Give y_to.");
+        y_to = reader.nextInt();
                 
-        return new Move(situation.getTurn(), orientation, 
-                    index, from, dest);
+        return new int[]{x_from, y_from, x_to, y_to};
     }
     
 }

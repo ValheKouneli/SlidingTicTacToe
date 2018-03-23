@@ -5,8 +5,6 @@
  */
 package slidingttt.logic;
 
-import slidingttt.board.Move;
-import slidingttt.board.Situation;
 
 /**
  *
@@ -20,7 +18,7 @@ public abstract class Player {
         this.color = color;
     }
     
-    abstract Move getNextMove(Situation situation);
+    public abstract int[] getNextMove(Game game);
 
     /**
      * @return the color
