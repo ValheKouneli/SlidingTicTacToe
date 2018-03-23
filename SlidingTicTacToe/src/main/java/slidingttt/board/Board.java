@@ -67,9 +67,9 @@ public class Board {
         board[x][y] = c;
     }
     
-    public void move(int x_from, int y_from, int x_to, int y_to) {
-        board[x_to][y_to] = board[x_from][y_from];
-        board[x_from][y_from] = 0;
+    public void move(int row_from, int col_from, int row_to, int col_to) {
+        board[row_to][col_to] = board[row_from][col_from];
+        board[row_from][col_from] = 0;
     }
            
     public char getBoardXY(int x, int y) {
