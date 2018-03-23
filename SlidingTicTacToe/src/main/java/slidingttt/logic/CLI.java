@@ -38,8 +38,8 @@ public class CLI extends Game {
 
     @Override
     public void setPlayers() {
-        HumanPlayer red = new HumanPlayer(Color.RED);
-        HumanPlayer black = new HumanPlayer(Color.BLACK);
+        HumanPlayer red = new HumanPlayer(PieceColor.RED);
+        HumanPlayer black = new HumanPlayer(PieceColor.BLACK);
         red.setScanner(reader);
         black.setScanner(reader);
         super.players = new Player[]{red, black};

@@ -5,6 +5,9 @@
  */
 package slidingttt.logic;
 
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
+
 /**
  *
  * @author Valhe Kouneli
@@ -12,4 +15,12 @@ package slidingttt.logic;
 public enum Orientation {
     HORIZONTAL,
     VERTICAL;
+
+    public Shape getNewShape() {
+        switch (this) {
+            case HORIZONTAL : return new Rectangle(90, 50);
+            case VERTICAL   : return new Rectangle(50, 90);
+            default         : return null;
+        }
+    }
 }

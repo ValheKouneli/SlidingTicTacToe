@@ -5,7 +5,7 @@
  */
 package slidingttt.board;
 
-import slidingttt.logic.Color;
+import slidingttt.logic.PieceColor;
 import slidingttt.logic.Orientation;
 
 /**
@@ -19,9 +19,9 @@ public class Move {
     private final int to;
     private final Orientation orientation;
     private final int lineIndex;
-    private final Color color;
+    private final PieceColor color;
     
-    public Move(Color color, Orientation orientation, int lineIndex, int from, int to) {
+    public Move(PieceColor color, Orientation orientation, int lineIndex, int from, int to) {
         this.color = color;
         this.orientation = orientation;
         this.from = from;
@@ -37,7 +37,7 @@ public class Move {
         return lineIndex;
     }
     
-    public Color getColor() {
+    public PieceColor getColor() {
         return color;
     }
     

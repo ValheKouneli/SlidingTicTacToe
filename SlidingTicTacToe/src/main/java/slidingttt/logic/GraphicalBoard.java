@@ -5,76 +5,88 @@
  */
 package slidingttt.logic;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Shape;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import javax.swing.JPanel;
+import java.util.HashMap;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Shape;
+import javafx.stage.Stage;
+import slidingttt.board.Piece;
 import slidingttt.board.Situation;
 
 /**
  *
  * @author Valhe Kouneli
  */
-class GraphicalBoard extends JPanel {
+class GraphicalBoard extends Application {
     
-    private ArrayList<Shape> pieces;
-
-    private final Dimension dim = new Dimension(500, 500);
+    private HashMap<PieceColor, HashMap<Orientation, HashMap<Integer, Shape>>> pieces;
+    private final Scene scene;
+    private Pane pane;
     private Situation situation;
     
     public GraphicalBoard() {
         super();
+        this.pane = new Pane();
+        this.scene = new Scene(pane);
     }
     
     
     public void setSituationAndInit(Situation situation) {
         this.situation = situation;
-        pieces = new ArrayList<>();
+        pieces = new HashMap<>();
+        Shape shape;
+        
+        pane.setPrefSize(situation.getSize()*100, situation.getSize()*100+100);
+        
+        for (PieceColor color : PieceColor.values()) {
+            pieces.put(color, new HashMap<>());
+            for (Orientation orientation : Orientation.values()) {
+                pieces.get(color).put(orientation, new HashMap<>());
+                for (int i=0; i<situation.getSize(); i++) {
+                    shape = orientation.getNewShape();
+                    pieces.get(color).get(orientation).put(i, orientation.getNewShape());
+                }
+            }
+        }
+        
         
         //add shapes
         
-        addMouseListener(new MouseAdapter() { //MouseListener is interface so can not be instantiated
-            @Override
-            public void mouseClicked(MouseEvent me) {
-                super.mouseClicked(me);
-                for (Shape s : pieces) {
-
-                    if (s.contains(me.getPoint())) {//check if mouse is clicked within shape
-
-                        //do something
-
-                    }
-                }
-            }
-        });
+        
+//        addMouseListener(new MouseAdapter() { //MouseListener is interface so can not be instantiated
+//            @Override
+//            public void mouseClicked(MouseEvent me) {
+//                super.mouseClicked(me);
+//                for (Shape s : pieces) {
+//
+//                    if (s.contains(me.getPoint())) {//check if mouse is clicked within shape
+//
+//                        //do something
+//
+//                    }
+//                }
+//            }
+//        });
     }
     
     public void refresh() {
-        for (Color value : Color.values()) {
+        Shape shape;
+        int piecePosition;
+        
+        for (PieceColor color : PieceColor.values()) {
             for (Orientation orientation : Orientation.values()) {
                 for (int i=0; i<situation.getSize(); i++) {
-                    //add pieces
+                    shape = pieces.get(color).get(orientation).get(i);
+                    piecePosition = situation.getPiecePosition(color, orientation, i);
                 }
             }
         }
     }
-    
-    @Override
-    protected void paintComponent(Graphics grphcs) {
-        super.paintComponent(grphcs);
-        Graphics2D g2d = (Graphics2D) grphcs;
-        for (Shape s : pieces) {
-            g2d.draw(s);
-        }
-    }
 
     @Override
-    public Dimension getPreferredSize() {
-        return dim;
+    public void start(Stage stage) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

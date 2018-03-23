@@ -9,7 +9,7 @@ import slidingttt.board.Line;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import slidingttt.logic.Color;
+import slidingttt.logic.PieceColor;
 import slidingttt.logic.Orientation;
 
 /**
@@ -34,33 +34,33 @@ public class LineTest {
     
     @Test
     public void constructorSetsCorrectPieceColors() {
-        assertEquals(Color.RED, line.getPiece(Color.RED).getColor());
-        assertEquals(Color.BLACK, line.getPiece(Color.BLACK).getColor());
+        assertEquals(PieceColor.RED, line.getPiece(PieceColor.RED).getColor());
+        assertEquals(PieceColor.BLACK, line.getPiece(PieceColor.BLACK).getColor());
 
     }
     
     @Test
     public void constructorSetsCorrectPieceOrientation() {
-        assertEquals(line.getOrientation(), line.getPiece(Color.BLACK).getOrientation());
-        assertEquals(line.getOrientation(), line.getPiece(Color.RED).getOrientation());
+        assertEquals(line.getOrientation(), line.getPiece(PieceColor.BLACK).getOrientation());
+        assertEquals(line.getOrientation(), line.getPiece(PieceColor.RED).getOrientation());
     }
     
     @Test
     public void constructorSetsCorrectPiecePositions() {
-        assertEquals(0, line.getPiece(Color.RED).getPosition());
-        assertEquals(4, line.getPiece(Color.BLACK).getPosition());
+        assertEquals(0, line.getPiece(PieceColor.RED).getPosition());
+        assertEquals(4, line.getPiece(PieceColor.BLACK).getPosition());
     }
     
     @Test
     public void constructorLetsPiecesKnowEachOther() {
-        assertEquals(0, line.getPiece(Color.BLACK).getOtherPiece().getPosition());
-        assertEquals(4, line.getPiece(Color.RED).getOtherPiece().getPosition());
+        assertEquals(0, line.getPiece(PieceColor.BLACK).getOtherPiece().getPosition());
+        assertEquals(4, line.getPiece(PieceColor.RED).getOtherPiece().getPosition());
     }
     
     @Test
     public void getCopyWorks() {
         Line copy = line.getCopy();
-        copy.getPiece(Color.RED).setPosition(3);
-        assertEquals(0, line.getPiece(Color.RED).getPosition());
+        copy.getPiece(PieceColor.RED).setPosition(3);
+        assertEquals(0, line.getPiece(PieceColor.RED).getPosition());
     }
 }

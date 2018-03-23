@@ -14,9 +14,9 @@ import slidingttt.board.Situation;
  */
 public abstract class Player {
     
-    private Color color;
+    private PieceColor color;
     
-    public Player(Color color) {
+    public Player(PieceColor color) {
         this.color = color;
     }
     
@@ -25,14 +25,14 @@ public abstract class Player {
     /**
      * @return the color
      */
-    public Color getColor() {
+    public PieceColor getColor() {
         return color;
     }
 
     /**
      * @param color the color to set
      */
-    public void setColor(Color color) {
+    public void setColor(PieceColor color) {
         this.color = color;
     }
 }

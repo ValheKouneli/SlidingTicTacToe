@@ -13,7 +13,7 @@ package slidingttt.logic;
 public class Const {
     private Const() { }
     
-    public static final int NUMBER_OF_COLORS = Color.values().length;
+    public static final int NUMBER_OF_COLORS = PieceColor.values().length;
     public static final int NUMBER_OF_ORIENTATIONS = Orientation.values().length;
     public static final int MAX_NUMBER_ON_FIELD = 3;
     

@@ -9,7 +9,7 @@ import slidingttt.board.Board;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import slidingttt.logic.Color;
+import slidingttt.logic.PieceColor;
 import slidingttt.logic.Orientation;
 
 /**
@@ -53,7 +53,7 @@ public class BoardTest {
                             + "B+++R\n"
                             + "R+++B\n"
                             + " brb \n";
-        board.movePiece(Color.RED, Orientation.HORIZONTAL, 0, 1);
+        board.movePiece(PieceColor.RED, Orientation.HORIZONTAL, 0, 1);
         assertEquals(nextPosition, board.toString());
     }
     

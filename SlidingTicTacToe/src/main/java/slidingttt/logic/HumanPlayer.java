@@ -17,7 +17,7 @@ public class HumanPlayer extends Player {
 
     Scanner reader;
     
-    public HumanPlayer(Color  color) {
+    public HumanPlayer(PieceColor  color) {
         super(color);
     }
     

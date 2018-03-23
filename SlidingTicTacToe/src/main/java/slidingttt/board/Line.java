@@ -7,7 +7,7 @@ package slidingttt.board;
 
 import slidingttt.board.Piece;
 import java.security.InvalidParameterException;
-import slidingttt.logic.Color;
+import slidingttt.logic.PieceColor;
 import slidingttt.logic.Orientation;
 
 /**
@@ -39,8 +39,8 @@ public class Line {
             red_position = length-1;
             black_position = 0;
         }
-        red = new Piece(Color.RED, orientation, red_position);
-        black = new Piece(Color.BLACK, orientation, black_position);
+        red = new Piece(PieceColor.RED, orientation, red_position);
+        black = new Piece(PieceColor.BLACK, orientation, black_position);
         red.setOtherPiece(black);
         black.setOtherPiece(red);
 
@@ -51,7 +51,7 @@ public class Line {
         black.setPosition(black_position);
     }
     
-    public void move(Color color, int destination) {
+    public void move(PieceColor color, int destination) {
         switch (color) {
             case RED:     red.setPosition(destination);
                                 break;
@@ -61,17 +61,17 @@ public class Line {
         }
     }
     
-    public Color getColorInPosition(int position) {
+    public PieceColor getColorInPosition(int position) {
         if (red.getPosition() == position) {
-            return Color.RED;
+            return PieceColor.RED;
         } else if (black.getPosition() == position) {
-            return Color.BLACK;
+            return PieceColor.BLACK;
         } else {
             return null;
         }
     }
     
-    public Piece getPiece(Color color){
+    public Piece getPiece(PieceColor color){
         switch (color) {
             case RED:     return red;
             case BLACK:   return black;

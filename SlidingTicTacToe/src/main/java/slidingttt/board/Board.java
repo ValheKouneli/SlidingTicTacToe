@@ -7,7 +7,7 @@ package slidingttt.board;
 
 import slidingttt.board.Line;
 import java.util.Arrays;
-import slidingttt.logic.Color;
+import slidingttt.logic.PieceColor;
 import slidingttt.logic.Const;
 import slidingttt.logic.Orientation;
 
@@ -83,14 +83,14 @@ public class Board {
         return this.size;
     }
     
-    public int getPiecePosition(Color color, Orientation orientation,
+    public int getPiecePosition(PieceColor color, Orientation orientation,
             int lineIndex) {
         return lines[orientation.ordinal()][lineIndex]
                 .getPiece(color).getPosition();
     }
     
     //TODO: make it take Move as argument
-    protected void movePiece(Color color, Orientation orientation, int lineIndex,
+    protected void movePiece(PieceColor color, Orientation orientation, int lineIndex,
             int newPosition) {
         lines[orientation.ordinal()][lineIndex]
                 .getPiece(color).setPosition(newPosition);
@@ -120,9 +120,9 @@ public class Board {
         */
         for (Line line : lines[0]) { 
             x = line.getNumber()+1;
-            y = line.getPiece(Color.RED).getPosition();
+            y = line.getPiece(PieceColor.RED).getPosition();
             emptyBoardRepresentation[x][y] = RED_HORIZONTAL;
-            y = line.getPiece(Color.BLACK).getPosition();
+            y = line.getPiece(PieceColor.BLACK).getPosition();
             emptyBoardRepresentation[x][y] = BLACK_HORIZONTAL;
         }
         /*
@@ -130,9 +130,9 @@ public class Board {
         */
         for (Line line: lines[1]) {
             y = line.getNumber()+1;
-            x = line.getPiece(Color.RED).getPosition();
+            x = line.getPiece(PieceColor.RED).getPosition();
             emptyBoardRepresentation[x][y] = RED_VERTICAL;
-            x = line.getPiece(Color.BLACK).getPosition();
+            x = line.getPiece(PieceColor.BLACK).getPosition();
             emptyBoardRepresentation[x][y] = BLACK_VERTICAL;
         }
         

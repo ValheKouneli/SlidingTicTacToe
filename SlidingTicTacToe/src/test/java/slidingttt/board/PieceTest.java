@@ -9,7 +9,7 @@ import slidingttt.board.Piece;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import slidingttt.logic.Color;
+import slidingttt.logic.PieceColor;
 import slidingttt.logic.Orientation;
 
 /**
@@ -22,12 +22,12 @@ public class PieceTest {
     
     @Before
     public void setUp() {
-        piece = new Piece(Color.RED, Orientation.VERTICAL, 0);
+        piece = new Piece(PieceColor.RED, Orientation.VERTICAL, 0);
     }
     
     @Test
     public void constructorWorks() {
-        assertEquals(Color.RED, piece.getColor());
+        assertEquals(PieceColor.RED, piece.getColor());
         assertEquals(Orientation.VERTICAL, piece.getOrientation());
     }
     
@@ -40,7 +40,7 @@ public class PieceTest {
     @Test
     public void settingOtherPieceWorks() {
         //TODO: make this test better
-        Piece other = new Piece(Color.BLACK, Orientation.HORIZONTAL, 0);
+        Piece other = new Piece(PieceColor.BLACK, Orientation.HORIZONTAL, 0);
         piece.setOtherPiece(other);
         assertEquals(Orientation.HORIZONTAL, piece.getOtherPiece().getOrientation());
     }

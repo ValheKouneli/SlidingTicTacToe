@@ -9,7 +9,7 @@ import slidingttt.board.Situation;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import slidingttt.logic.Color;
+import slidingttt.logic.PieceColor;
 
 /**
  *
@@ -33,15 +33,15 @@ public class SituationTest {
     
     @Test
     public void constructorSetsPiecesOnFieldToZero() {
-        assertEquals(0, situation.getPiecesOnField(Color.BLACK));
-        assertEquals(0, situation.getPiecesOnField(Color.RED));
+        assertEquals(0, situation.getPiecesOnField(PieceColor.BLACK));
+        assertEquals(0, situation.getPiecesOnField(PieceColor.RED));
     }
     
     @Test
     public void constructorSetsPositionsToNoPiecesOnField() {
         //random tests
-        assertEquals(false, situation.getPiecePositions(Color.RED, SIZE-1, SIZE-1));
-        assertEquals(false, situation.getPiecePositions(Color.BLACK, SIZE-1, SIZE-1));
+        assertEquals(false, situation.getPiecePositions(PieceColor.RED, SIZE-1, SIZE-1));
+        assertEquals(false, situation.getPiecePositions(PieceColor.BLACK, SIZE-1, SIZE-1));
     }
     
     @Test

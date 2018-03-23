@@ -6,7 +6,7 @@
 package slidingttt.board;
 
 import java.security.InvalidParameterException;
-import slidingttt.logic.Color;
+import slidingttt.logic.PieceColor;
 import slidingttt.logic.Const;
 
 
@@ -22,14 +22,14 @@ public class Situation extends Board {
     //by what color
     private boolean[][][] piecePositions;
 
-    private Color turn;
+    private PieceColor turn;
     
     public Situation(int size) {
         super(size);
         piecesOnField = new int[Const.NUMBER_OF_COLORS];
         piecePositions = new boolean[Const.NUMBER_OF_COLORS][size+2][size+2];
         
-        turn = Color.RED;
+        turn = PieceColor.RED;
     }
     
     public boolean move(Move move) {
@@ -98,9 +98,9 @@ public class Situation extends Board {
         /*
         * move is illegal if the destination spot is occupied
         */
-        if (piecePositions[Color.RED.ordinal()][piecesXcoordinateTo]
+        if (piecePositions[PieceColor.RED.ordinal()][piecesXcoordinateTo]
                                      [piecesYcoordinateTo] ||
-                piecePositions[Color.BLACK.ordinal()][piecesXcoordinateTo]
+                piecePositions[PieceColor.BLACK.ordinal()][piecesXcoordinateTo]
                                            [piecesYcoordinateTo]) {
             return false;
         }
@@ -125,7 +125,7 @@ public class Situation extends Board {
         turn = whoIsNext(turn);
     }
     
-    public boolean thereIsThreeInARow(Color color) {
+    public boolean thereIsThreeInARow(PieceColor color) {
         //check downward diagonal 3-in-a-rows
         for (int i=1; i<=super.getSize()-2; i++) {
             for (int j=1; j<=super.getSize()-2; j++) {
@@ -176,34 +176,34 @@ public class Situation extends Board {
         
     }
     
-    public Color whoIsNext(Color turnNow) {
+    public PieceColor whoIsNext(PieceColor turnNow) {
         //if there are more than two colors, should consult a static final list
         //that lists the turn order
         switch (turnNow) {
-            case RED :    return Color.BLACK;
-            case BLACK :  return Color.RED;
+            case RED :    return PieceColor.BLACK;
+            case BLACK :  return PieceColor.RED;
             default:            throw new InvalidParameterException
                                                 ("Color not in use.");
         }
     }
     
-    public Color whoWasBefore(Color turnNow) {
+    public PieceColor whoWasBefore(PieceColor turnNow) {
         //if there are more than two colors, should consult a static final list
         //that lists the turn order
         switch (turnNow) {
-            case RED :    return Color.BLACK;
-            case BLACK :  return Color.RED;
+            case RED :    return PieceColor.BLACK;
+            case BLACK :  return PieceColor.RED;
             default:            throw new InvalidParameterException
                                                 ("Color not in use.");
         }
     }
     
-    public int getPiecesOnField(Color color) {
+    public int getPiecesOnField(PieceColor color) {
         return piecesOnField[color.ordinal()];
     }
     
     
-    public boolean getPiecePositions(Color color, int x, int y) {
+    public boolean getPiecePositions(PieceColor color, int x, int y) {
         return piecePositions[color.ordinal()][x][y];
     }
     
@@ -212,7 +212,7 @@ public class Situation extends Board {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
-    public Color getTurn() {
+    public PieceColor getTurn() {
         return turn;
     }
 
