@@ -23,6 +23,7 @@ public class HumanPlayer extends Player {
         this.reader = reader;
     }
     
+    //TODO: Separate interface from Player!!
     @Override
     public int[] getNextMove(Game game) {
         int x_from;
