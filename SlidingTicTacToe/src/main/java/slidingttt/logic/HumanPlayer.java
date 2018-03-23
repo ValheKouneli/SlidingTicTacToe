@@ -26,35 +26,35 @@ public class HumanPlayer extends Player {
     //TODO: Separate interface from Player!!
     @Override
     public int[] getNextMove(Game game) {
-        int x_from;
-        int y_from;
-        int x_to;
-        int y_to;
+        int row_from;
+        int col_from;
+        int row_to;
+        int col_to;
         final int boardSize = game.getSize();
         
         System.out.println(game.toString());
         
         do {
-            System.out.println("Give x_from.");
-            x_from = reader.nextInt();
-        } while (!isLegal(x_from, boardSize));
+            System.out.println("Give row_from.");
+            row_from = reader.nextInt();
+        } while (!isLegal(row_from, boardSize));
         
         do {
-            System.out.println("Give y_from index.");
-            y_from = reader.nextInt();
-        } while (!isLegal(y_from, boardSize));
+            System.out.println("Give col_from index.");
+            col_from = reader.nextInt();
+        } while (!isLegal(col_from, boardSize));
 
         do {
-            System.out.println("Give x_to.");
-            x_to = reader.nextInt();
-        } while (!isLegal(x_to, boardSize));
+            System.out.println("Give row_to.");
+            row_to = reader.nextInt();
+        } while (!isLegal(row_to, boardSize));
         
         do {
             System.out.println("Give y_to.");
-            y_to = reader.nextInt();
-        } while (!isLegal(y_to, boardSize));
+            col_to = reader.nextInt();
+        } while (!isLegal(col_to, boardSize));
                 
-        return new int[]{x_from, y_from, x_to, y_to};
+        return new int[]{row_from, col_from, row_to, col_to};
     }
     
     private boolean isLegal(int i, int boardSize){
