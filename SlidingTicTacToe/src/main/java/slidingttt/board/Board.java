@@ -63,8 +63,8 @@ public class Board {
         return this.size;
     }
     
-    public void setBoardXY(int x, int y, char c) {
-        board[x][y] = c;
+    public void setBoardXY(int row, int col, char c) {
+        board[row][col] = c;
     }
     
     public void move(int row_from, int col_from, int row_to, int col_to) {
@@ -72,8 +72,8 @@ public class Board {
         board[row_from][col_from] = 0;
     }
            
-    public char getBoardXY(int x, int y) {
-        return board[x][y];
+    public char getBoardXY(int row, int col) {
+        return board[row][col];
     }
     
     public Orientation getOrientation(char c) {
@@ -92,12 +92,12 @@ public class Board {
         }
     }
     
-    public PieceColor getPieceColor(int x, int y) {
-        return getPieceColor(board[x][y]);
+    public PieceColor getPieceColor(int row, int col) {
+        return getPieceColor(board[row][col]);
     }
     
-    public Orientation getOrientation(int x, int y) {
-        return getOrientation(board[x][y]);
+    public Orientation getOrientation(int row, int col) {
+        return getOrientation(board[row][col]);
     }
     
     public char getCharacter(PieceColor color, Orientation orientation){
