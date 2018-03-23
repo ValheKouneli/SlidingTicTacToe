@@ -119,7 +119,7 @@ public class Board {
         * Horizontal lines
         */
         for (Line line : lines[0]) { 
-            x = line.getNumber()+1;
+            x = line.getCoordinate()+1;
             y = line.getPiece(PieceColor.RED).getPosition();
             emptyBoardRepresentation[x][y] = RED_HORIZONTAL;
             y = line.getPiece(PieceColor.BLACK).getPosition();
@@ -129,7 +129,7 @@ public class Board {
         * Vertical lines
         */
         for (Line line: lines[1]) {
-            y = line.getNumber()+1;
+            y = line.getCoordinate()+1;
             x = line.getPiece(PieceColor.RED).getPosition();
             emptyBoardRepresentation[x][y] = RED_VERTICAL;
             x = line.getPiece(PieceColor.BLACK).getPosition();

@@ -28,7 +28,7 @@ public class LineTest {
     @Test
     public void constructorSetsCorrectIndexAndLength() {
         assertEquals(Orientation.VERTICAL, line.getOrientation());
-        assertEquals(0, line.getNumber());
+        assertEquals(0, line.getCoordinate());
         assertEquals(5, line.getLength());
     }
     

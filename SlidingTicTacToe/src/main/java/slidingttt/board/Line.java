@@ -17,61 +17,58 @@ import slidingttt.logic.Orientation;
 public class Line {
     
     private final int length;
-    private final int index;
+    private final int[] coordinates; //start of line
     private Piece red;
     private Piece black;
     private final Orientation orientation;
     
-    public Line(Orientation orientation, int index, int length){
+    public Line(Orientation orientation, int[] coordinates, int length){
         this.orientation = orientation;
         this.length = length;
-        this.index = index;
+        this.coordinates = coordinates;
         setBeginningPosition();
     }
     
     private void setBeginningPosition() {
-        int red_position;
-        int black_position;
-        if (index % 2 == 0) {
-            red_position = 0;
-            black_position = length-1;
-        } else {
-            red_position = length-1;
-            black_position = 0;
+        int[] red_coordinates = coordinates.clone();
+        int[] black_coordinates = coordinates.clone();
+        boolean redFirst = true;
+        for (int i=0; i<coordinates.length; i++){
+            if (coordinates[i] % 2 != 0) {
+                redFirst = !redFirst;
+                //I have no idea if this is right in 3-dimensions and up >.<
+            }
         }
-        red = new Piece(PieceColor.RED, orientation, red_position);
-        black = new Piece(PieceColor.BLACK, orientation, black_position);
+        
+        if (redFirst) {
+            red_coordinates[orientation.ordinal()] = 0;
+            black_coordinates[orientation.ordinal()] = length-1;
+        } else {
+            red_coordinates[orientation.ordinal()] = length-1;
+            black_coordinates[orientation.ordinal()] = 0;
+        }
+        red = new Piece(PieceColor.RED, orientation, red_coordinates);
+        black = new Piece(PieceColor.BLACK, orientation, black_coordinates);
         red.setOtherPiece(black);
         black.setOtherPiece(red);
 
     }
     
-    public void setPiecePositions(int red_position, int black_position) {
-        red.setPosition(red_position);
-        black.setPosition(black_position);
-    }
-    
-    public void move(PieceColor color, int destination) {
-        switch (color) {
-            case RED:     red.setPosition(destination);
-                                break;
-            case BLACK:   black.setPosition(destination);
-                                break;
-            default:        throw new InvalidParameterException("Color not in use.");
-        }
+    public boolean move(PieceColor color, int position) {
+        return getPiece(color).setPosition(position);
     }
     
     public PieceColor getColorInPosition(int position) {
-        if (red.getPosition() == position) {
+        if (red.getPosition(orientation) == position) {
             return PieceColor.RED;
-        } else if (black.getPosition() == position) {
+        } else if (black.getPosition(orientation) == position) {
             return PieceColor.BLACK;
         } else {
             return null;
         }
     }
     
-    public Piece getPiece(PieceColor color){
+    private Piece getPiece(PieceColor color){
         switch (color) {
             case RED:     return red;
             case BLACK:   return black;
@@ -83,8 +80,8 @@ public class Line {
         return orientation;
     }
     
-    public int getNumber() {
-        return index;
+    public int getCoordinate(Orientation orientation) {
+        return coordinates[orientation.ordinal()];
     }
     
     public int getLength() {
@@ -92,8 +89,9 @@ public class Line {
     }
     
     public Line getCopy() {
-        Line copy = new Line(orientation, index, length);
-        copy.setPiecePositions(red.getPosition(), black.getPosition());
+        Line copy = new Line(orientation, coordinates, length);
+        copy.move(PieceColor.RED, red.getPosition(orientation));
+        copy.move(PieceColor.BLACK, black.getPosition(orientation));
         return copy;
     }
 }
