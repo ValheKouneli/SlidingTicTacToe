@@ -16,14 +16,14 @@ import slidingttt.logic.Orientation;
 public class Piece {
     
     private final PieceColor color;
-    private int position;
+    private int[] coordinates;
     private Orientation orientation;
     private Piece otherPiece; //the other Piece on the same Line
     
-    public Piece(PieceColor color, Orientation orientation, int position) {
+    public Piece(PieceColor color, Orientation orientation, int[] coordinates) {
         this.color = color;
         this.orientation = orientation;
-        this.position = position;
+        this.coordinates = coordinates;
     }
     
     public void setOtherPiece(Piece piece) {
@@ -34,23 +34,20 @@ public class Piece {
         return color;
     }
     
-    public Orientation getOrientation() {
-        return orientation;
+    public int getPosition(Orientation orientation) {
+        return coordinates[orientation.ordinal()];
     }
-    
-    public int getPosition(){
-        return position;
-    }
+
     
     public Piece getOtherPiece() {
         return otherPiece;
     }
     public void setPosition(int position) {
-        this.position = position;
+        coordinates[orientation.ordinal()] = position;
     }
     
     public Piece getCopy(){
-        Piece copy = new Piece(color, orientation, position);
+        Piece copy = new Piece(color, orientation, coordinates);
         return copy;
     }
     
